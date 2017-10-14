@@ -4,7 +4,7 @@ from django.db import models
 
 from apps.obra.models import Obra
 from apps.arquitecto.models import Arquitecto
-from apps.inventario.models import Inventario
+
 
 # Create your models here.
 
