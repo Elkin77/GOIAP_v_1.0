@@ -8,4 +8,5 @@ from .models import Inversionista
 
 # Create your views here.
 def indexInversionista(request):
-    return HttpResponse("Hello, world. You're at the Inversionista index.")
+	context=None
+	return render(request,'inversionista/IndexInversionista.html', context)

@@ -8,4 +8,5 @@ from .models import Ingeniero
 
 # Create your views here.
 def indexIngeniero(request):
-    return HttpResponse("Hello, world. You're at the Ingeniero index.")
+	context=None
+	return render(request,'ingeniero/IndexIngeniero.html', context)

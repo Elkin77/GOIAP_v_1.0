@@ -8,4 +8,5 @@ from .models import Contador
 
 # Create your views here.
 def indexContador(request):
-    return HttpResponse("Hello, world. You're at the Contador index.")
+	context=None
+	return render(request,'contador/IndexContador.html', context)

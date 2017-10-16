@@ -8,4 +8,5 @@ from .models import Empleado
 
 # Create your views here.
 def indexEmpleado(request):
-    return HttpResponse("Hello, world. You're at the Empleado index.")
+	context=None
+	return render(request,'empleado/IndexEmpleado.html', context)

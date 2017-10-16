@@ -8,4 +8,5 @@ from .models import Arquitecto
 
 # Create your views here.
 def indexArquitecto(request):
-    return HttpResponse("Hello, world. You're at the Arquitecto index.")
+	context=None
+	return render(request,'arquitecto/IndexArquitecto.html', context)

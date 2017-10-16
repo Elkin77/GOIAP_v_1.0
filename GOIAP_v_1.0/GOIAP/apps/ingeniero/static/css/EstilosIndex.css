@@ -1,0 +1,112 @@
+.wrapper .navBar a i{
+	font-size: 55px;
+	margin-right: 10px;
+}
+
+.tituloIndex{
+	position: absolute;
+	left: 35%;
+	font-family: 'Roboto', sans-serif;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	top: 12%;
+}
+
+#formLogin{
+	background: #252932;
+	position: absolute;
+	top: 20%;
+	left: 28%;
+	width: 40%;
+	height: 55%;
+	margin: 3%;
+	padding-top: 4%;
+	border-radius:15px;
+}
+
+#formLogin fieldset{
+	margin: 6%;
+	margin-right: 15%; 
+	margin-left: 15%;
+	border-radius: 50px;
+}
+
+#formLogin input{
+	margin-bottom: 3%;
+}
+#contenedor{
+    background: rgba(0,0,0,0.8);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.btn.btn-default.boton{
+	position: absolute;
+	font-weight: bold;
+	background: #B08A04;
+	border-color:#B08A04; 
+	color: #252932;
+	
+	top: 65%;
+	left: 40%;
+	width: 20%;
+}
+
+#links nav{/*Definir el tamaño y posicion del nav*/
+	line-height: 100px;
+}
+
+#links nav a{/*Modificar los campos de nav para que se vean como un nav bar*/
+	display: inline-block;
+	color: #B08A04;
+	text-decoration: none;
+	padding: 10px 20px;
+	line-height: normal;
+	font-size: 15px;
+	font-weight: bold;
+	-webkit-transition:all 500ms ease;/*Aplicar animacion al momento de pasar por cada uno de los nav*/
+	-o-transition:all 500ms ease;/*Aplicar animacion al momento de pasar por cada uno de los nav*/
+	transition:all 500ms ease;/*Aplicar animacion al momento de pasar por cada uno de los nav*/
+}
+
+#links nav a:hover{/*Aplicar que cuando el raton este en algun nav, este cambie de color*/
+	background: #B08A04;
+	color: #252932;
+	border-radius: 50px;/*Cambiar la caja cuadrada a circular*/
+
+}
+.pos{
+	font-size: 26px;
+	text-align: center;
+	margin-top: 9%;
+	margin-left: 32%;
+}
+
+
+
+.alert.alert-dismissible.alert-danger.alerta{
+	background: #f09609;
+	color: #fff;
+	position: absolute;
+	left: 30%;
+	top: 20%;
+}
+.alert.alert-dismissible.alert-danger.alerta .alert-link{
+	color: #000;
+}
+
+footer{
+	position: absolute;
+	top: 611px;
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 3;
+	color: #B08A04;
+	background: #252932;
+}

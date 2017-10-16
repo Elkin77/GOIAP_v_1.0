@@ -8,6 +8,7 @@ from .models import Administrador
 
 # Create your views here.
 def indexAdmin(request):
-    return HttpResponse("Hello, world. You're at the Administrador index.")
+	context=None
+	return render(request,'administrador/IndexAdmin.html', context)
 
 

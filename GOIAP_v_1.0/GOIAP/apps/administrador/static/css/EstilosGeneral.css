@@ -1,0 +1,77 @@
+*{margin:0; padding:0;}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #fffffa;
+	min-height: 100vh;
+}
+
+header{
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	background: #252932;
+	margin-bottom: 10px;
+}
+
+.wrapper{
+	width: 90%;
+	max-width: 1000px;
+	margin: auto; /*Esta linea centra el codigo y le coloca margin en la izquierda como en la Derecha*/
+	overflow: hidden;
+}
+/*Si el Logo es de texto*/
+/*header .logo{
+	color: #f2f2f2;
+	font-size: 50px;
+	line-height: 100px;
+	float: left;
+}*/
+
+header .logo img{
+	width: 250px;
+	padding: 10px;
+	line-height: 100px;
+	float: left;
+}
+
+
+header nav{
+	float: right;
+	line-height: 100px
+}
+
+header .iconos a{
+	display: inline-block;
+	color: #B08A04;
+	text-decoration: none;
+	padding: 20px 20px;
+	line-height: normal;
+	font-size: 40px;
+	font-weight: bold;
+	-webkit-transition: all 500ms ease;
+	-o-transition: all 500ms ease;
+	transition: all 500ms ease;
+	border-radius: 50px;
+}
+/*Estilos si en vez de tener iconos, tiene letras*/
+header .menu a{
+	display: inline-block;
+	color: #B08A04;
+	text-decoration: none;
+	padding: 10px 20px;
+	line-height: normal;
+	font-size: 20px;
+	font-weight: bold;
+	-webkit-transition: all 500ms ease;
+	-o-transition: all 500ms ease;
+	transition: all 500ms ease;
+	border-radius: 50px;
+}
+/*Esto se pasara a los estilos del index de cada Usuario*/
+header .menu a:hover{
+	background: #B08A04;
+	display: flex;
+	color: #252932;
+}

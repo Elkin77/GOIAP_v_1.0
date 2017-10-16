@@ -7,4 +7,5 @@ from .models import Perfil
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the index.")
+	context=None
+	return render(request,'user/Index.html', context)
