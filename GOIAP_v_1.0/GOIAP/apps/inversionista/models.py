@@ -1,8 +1,10 @@
 from django.db import models
 from apps.obra.models import Obra
+from apps.user.models import Perfil
 
 # Create your models here.
 class Inversionista(models.Model):
+	fk_Perfil = models.OneToOneField(Perfil, on_delete=models.CASCADE)
 	telefono = models.CharField(max_length=50)
 	permisos_documentos = models.BooleanField()
 	permisos_facturas = models.BooleanField()
