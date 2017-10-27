@@ -1,5 +1,21 @@
 {% extends 'user/base/Base.html' %}
 {% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block contenido %}
+<div class="contenedorGeneral">
+	<fieldset>
+		<legend>Administrador</legend>
+		<div class="der">
+			<a href="#" class="btn btn-default botonGeneral">Gestionar Usuarios</a>
+			<a href="#" class="btn btn-default botonGeneral">Gestionar Documentos</a>
+		</div>
+		<div class="izq">
+			<a href="#" class="btn btn-default botonGeneral">Gestionar Permisos</a>
+			<a href="#" class="btn btn-default botonGeneral">Gestionar Obra</a>
+		</div>
+	</fieldset>
+</div>
 {% endblock %}

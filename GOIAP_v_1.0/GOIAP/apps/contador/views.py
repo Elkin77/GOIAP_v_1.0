@@ -7,6 +7,7 @@ from apps.user.models import Perfil
 from .models import Contador
 
 # Create your views here.
+@login_required
 def indexContador(request):
 	context=None
 	return render(request,'contador/IndexContador.html', context)

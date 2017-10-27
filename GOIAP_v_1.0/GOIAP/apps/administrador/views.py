@@ -7,6 +7,7 @@ from apps.user.models import Perfil
 from .models import Administrador
 
 # Create your views here.
+@login_required
 def indexAdmin(request):
 	context=None
 	return render(request,'administrador/IndexAdmin.html', context)

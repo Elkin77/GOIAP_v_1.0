@@ -1,3 +1,45 @@
+.contenedorGeneral{
+	width: 100%;
+	height: 100;
+	padding:10%;
+}
+
+.contenedorGeneral fieldset{
+	background-color: #252932;
+	width: 100%;
+	height: 100%;
+	margin-top: 2%;
+}
+.contenedorGeneral fieldset legend{
+	background: #252932;
+	color: #B08A04;
+	padding-left: 3%;
+	font-family: bold;
+}
+.arriba{
+	float: left;
+	width: 50%;
+	margin-bottom: 7%;
+	margin-left: 25%;
+}
+
+.btn.btn-default.botonGeneral{
+	width: 65%;
+	height: 50%;
+	margin: 0%;
+	margin-left: 18%;
+	margin-top: 10%;
+	padding: 4%;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.botonGeneral:hover{
+	color: #B08A04;
+}
+
+
+
 footer{
 	position: absolute;
 	top: 611px;

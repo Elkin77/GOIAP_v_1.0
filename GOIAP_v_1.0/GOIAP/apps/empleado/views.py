@@ -7,6 +7,7 @@ from apps.user.models import Perfil
 from .models import Empleado
 
 # Create your views here.
+@login_required
 def indexEmpleado(request):
 	context=None
 	return render(request,'empleado/IndexEmpleado.html', context)

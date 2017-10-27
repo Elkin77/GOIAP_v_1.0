@@ -1,5 +1,16 @@
 {% extends 'user/base/Base.html' %}
 {% load staticfiles %}
+{% block title %}Inversionista GOIAP {% endblock %}
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosIndexInversionista.css' %}">
+{% endblock %}
+{% block contenido %}
+<div class="contenedorGeneral">
+	<fieldset>
+		<legend>Inversionista</legend>
+		<div class="arriba">
+			<a href="#" class="btn btn-default botonGeneral">Consultar Estado Obra</a>
+		</div>
+	</fieldset>
+</div>
 {% endblock %}

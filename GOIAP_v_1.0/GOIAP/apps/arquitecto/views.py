@@ -7,6 +7,7 @@ from apps.user.models import Perfil
 from .models import Arquitecto
 
 # Create your views here.
+@login_required
 def indexArquitecto(request):
 	context=None
 	return render(request,'arquitecto/IndexArquitecto.html', context)

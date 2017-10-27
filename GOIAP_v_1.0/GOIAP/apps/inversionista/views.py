@@ -7,6 +7,7 @@ from apps.user.models import Perfil
 from .models import Inversionista
 
 # Create your views here.
+@login_required
 def indexInversionista(request):
 	context=None
 	return render(request,'inversionista/IndexInversionista.html', context)

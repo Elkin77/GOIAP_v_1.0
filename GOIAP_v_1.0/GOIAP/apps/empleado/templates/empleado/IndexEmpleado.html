@@ -1,5 +1,16 @@
 {% extends 'user/base/Base.html' %}
 {% load staticfiles %}
+{% block title %}Empleado GOIAP {% endblock %}
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosIndexEmpleado.css' %}">
+{% endblock %}
+{% block contenido %}
+<div class="contenedorGeneral">
+	<fieldset>
+		<legend>Empleado</legend>
+		<div class="arriba">
+			<a href="#" class="btn btn-default botonGeneral">Gestionar Usuarios</a>
+		</div>
+	</fieldset>
+</div>
 {% endblock %}

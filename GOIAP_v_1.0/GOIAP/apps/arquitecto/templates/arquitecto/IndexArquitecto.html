@@ -1,5 +1,20 @@
 {% extends 'user/base/Base.html' %}
 {% load staticfiles %}
+{% block title %}Arquitecto GOIAP{% endblock %}
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosIndexArquitecto.css' %}">
+{% endblock %}
+{% block contenido %}
+<div class="contenedorGeneral">
+	<fieldset>
+		<legend>Proveedor</legend>
+		<div class="der">
+			<a href="#" class="btn btn-default botonGeneral">Documentos De Obra</a>
+		</div>
+		<div class="izq">
+			<a href="#" class="btn btn-default botonGeneral">Inventario</a>
+		</div>
+	</fieldset>
+</div>
+
 {% endblock %}
