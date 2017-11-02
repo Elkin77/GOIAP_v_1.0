@@ -72,6 +72,5 @@ header .menu a{
 /*Esto se pasara a los estilos del index de cada Usuario*/
 header .menu a:hover{
 	background: #B08A04;
-	display: flex;
 	color: #252932;
 }

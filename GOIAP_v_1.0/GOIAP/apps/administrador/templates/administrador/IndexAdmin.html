@@ -4,18 +4,16 @@
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
 {% endblock %}
-{% block contenido %}
-<div class="contenedorGeneral">
-	<fieldset>
-		<legend>Administrador</legend>
-		<div class="der">
-			<a href="#" class="btn btn-default botonGeneral">Gestionar Usuarios</a>
-			<a href="#" class="btn btn-default botonGeneral">Gestionar Documentos</a>
-		</div>
-		<div class="izq">
-			<a href="#" class="btn btn-default botonGeneral">Gestionar Permisos</a>
-			<a href="#" class="btn btn-default botonGeneral">Gestionar Obra</a>
-		</div>
-	</fieldset>
-</div>
+{% block iconos %}
+<nav class="iconos">
+	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block menu %}
+<nav class="menu">
+	<a href="#">Usuarios</a>
+	<a href="#">Permisos</a>
+	<a href="#">Documentos</a>
+	<a href="#">Obra</a>
+</nav>
 {% endblock %}
