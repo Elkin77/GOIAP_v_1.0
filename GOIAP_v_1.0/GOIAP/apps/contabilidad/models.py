@@ -2,7 +2,6 @@ from django.db import models
 
 from apps.empleado.models import Empleado
 
-from apps.contador.models import Contador
 # Create your models here.
 class Nomina(models.Model):
 	dias_laborados = models.IntegerField()
@@ -25,7 +24,6 @@ class Nomina(models.Model):
 	archivo = models.CharField(max_length=50)
 	fecha = models.DateField()
 	fk_empleado = models.ForeignKey(Empleado, null=True, blank=True, on_delete=models.CASCADE)
-	fk_contador = models.ForeignKey(Contador, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Cuenta_cobro(models.Model):
@@ -37,4 +35,3 @@ class Cuenta_cobro(models.Model):
 	concepto = models.CharField(max_length=50)
 	retenciones = models.CharField(max_length=50)
 	fk_empleado = models.ForeignKey(Empleado, null=True, blank=True, on_delete=models.CASCADE)
-	fk_contador = models.ForeignKey(Contador, null=True, blank=True, on_delete=models.CASCADE)

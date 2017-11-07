@@ -1,9 +1,6 @@
 from django.db import models
 from apps.obra.models import Obra
-from apps.arquitecto.models import Arquitecto
-from apps.ingeniero.models import Ingeniero
-from apps.contador.models import Contador
-from apps.empleado.models import Empleado
+from apps.user.models import Perfil
 # Create your models here.
 
 
@@ -18,7 +15,7 @@ class Documento_arquitectura(models.Model):
 	descripcion = models.CharField(max_length=300)
 	observacion = models.CharField(max_length=300)
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
-	fk_arquitecto = models.ForeignKey(Arquitecto, null=True, blank=True, on_delete=models.CASCADE)
+	fk_arquitecto = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Documento_ingenieria(models.Model):
@@ -31,7 +28,7 @@ class Documento_ingenieria(models.Model):
 	descripcion = models.CharField(max_length=300)
 	observacion = models.CharField(max_length=300)
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
-	fk_ingeniero = models.ForeignKey(Ingeniero, null=True, blank=True, on_delete=models.CASCADE)
+	fk_ingeniero = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Documento_contable(models.Model):
@@ -44,7 +41,7 @@ class Documento_contable(models.Model):
 	descripcion = models.CharField(max_length=300)
 	observacion = models.CharField(max_length=300)
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
-	fk_contador = models.ForeignKey(Contador, null=True, blank=True, on_delete=models.CASCADE)
+	fk_contador = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Reporte(models.Model):
@@ -56,4 +53,4 @@ class Reporte(models.Model):
 	descripcion = models.CharField(max_length=300)
 	observacion = models.CharField(max_length=300)
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
-	fk_empleado = models.ForeignKey(Empleado, null=True, blank=True, on_delete=models.CASCADE)	
+	fk_empleado = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)	

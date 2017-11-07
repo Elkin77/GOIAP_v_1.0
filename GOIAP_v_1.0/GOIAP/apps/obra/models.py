@@ -1,5 +1,5 @@
 from django.db import models
-from apps.administrador.models import Administrador
+from apps.user.models import Perfil
 
 # Create your models here.
 
@@ -13,4 +13,4 @@ class Obra (models.Model):
 	fechaInicio = models.DateField()
 	fechaFin = models.DateField()
 	imagen = models.CharField(max_length=50)
-	fk_administrador = models.ForeignKey(Administrador, null=True, blank=True, on_delete=models.CASCADE)
+	fk_administrador = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)

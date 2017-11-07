@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from apps.user.models import Perfil
 from django.contrib.auth import authenticate, login, logout
-from .models import Contador
 
 # Create your views here.
 @login_required

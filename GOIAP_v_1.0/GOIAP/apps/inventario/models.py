@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 from apps.obra.models import Obra
-from apps.arquitecto.models import Arquitecto
 
 
 # Create your models here.
@@ -16,7 +15,6 @@ class Inventario(models.Model):
 	descripcion = models.CharField(max_length=300)
 	nro_articulos = models.IntegerField()
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
-	fk_arquitecto = models.ForeignKey(Arquitecto, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Contenido(models.Model):
