@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.empleado.models import Empleado
+from apps.empleado.models import EmpleadoUser
 
 # Create your models here.
 class Nomina(models.Model):
@@ -23,7 +23,7 @@ class Nomina(models.Model):
 	neto_pagar = models.CharField(max_length=50)
 	archivo = models.CharField(max_length=50)
 	fecha = models.DateField()
-	fk_empleado = models.ForeignKey(Empleado, null=True, blank=True, on_delete=models.CASCADE)
+	fk_empleado = models.ForeignKey(EmpleadoUser, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Cuenta_cobro(models.Model):
@@ -34,4 +34,4 @@ class Cuenta_cobro(models.Model):
 	fecha = models.DateField()
 	concepto = models.CharField(max_length=50)
 	retenciones = models.CharField(max_length=50)
-	fk_empleado = models.ForeignKey(Empleado, null=True, blank=True, on_delete=models.CASCADE)
+	fk_empleado = models.ForeignKey(EmpleadoUser, null=True, blank=True, on_delete=models.CASCADE)

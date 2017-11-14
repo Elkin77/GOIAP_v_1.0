@@ -4,7 +4,7 @@ from apps.user.models import Perfil
 # Create your models here.
 
 
-class Empleado(models.Model):
+class EmpleadoUser(models.Model):
 	fk_Perfil = models.OneToOneField(Perfil, on_delete=models.CASCADE)
 	cargo = models.CharField(max_length=50)
 	documento = models.CharField(max_length=100)
