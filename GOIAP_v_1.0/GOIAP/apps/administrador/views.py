@@ -57,7 +57,7 @@ def registrarUsuario_view(request):
             perfil.fk_authUser=usuario1 
             perfil.rol= request.POST['rol']
             perfil.save()
-            return render(request,"administrador/registrar_usuarios.html")   
+            return redirect('registrarUsuarios')  
         except KeyError:
             datosUser=KeyError
             context={'datosUser':datosUser}
