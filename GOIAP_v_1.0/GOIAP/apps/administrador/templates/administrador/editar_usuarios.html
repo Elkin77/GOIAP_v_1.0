@@ -1,0 +1,115 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block menu %}
+<nav class="menu">
+	<a href="#">Usuarios</a>	
+	<a href="#">Permisos</a>
+	<a href="#">Documentos</a>
+	<a href="#">Obra</a>
+</nav>
+{% endblock %}
+{% block content %}
+<div class="formulario">
+	<fieldset>
+		<legend>Editar Usuario</legend>
+		<form method="POST">
+	{% csrf_token %}
+	{{ form.as_p}}
+	<div  class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label>ID</label>
+				<input class="form-control" type="text" name="id" value="{{usuarios.id}}" disabled="disabled">
+			</div>
+		</div>
+	</div>
+	<div  class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label>Usuario</label>
+				<input class="form-control" type="text" name="username" value="{{usuarios.username}}">
+			</div>
+		</div>
+	</div>
+	<div  class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label>Nombre</label>
+				<input class="form-control" type="text" name="first_name" value="{{usuarios.first_name}}">
+			</div>
+		</div>
+	</div>
+	<div  class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label>Apellido</label>
+				<input class="form-control" type="text" name ="last_name" value="{{usuarios.last_name}}">
+			</div>
+		</div>
+	</div>
+	<div  class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label>Correo</label>
+				<input class="form-control" type="text" name="email" value="{{usuarios.email}}">
+			</div>
+		</div>
+	</div>
+	<div  class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label>Contraseña</label>
+				<input class="form-control" type="password" name="password" value="{{usuarios.password}}">
+			</div>
+		</div>
+	</div>
+	<div  class="row"> 
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				    <label for="rol" class="col-lg-2 control-label labels">Rol</label>
+				    <select class="form-control inputs" id="rol" name="rol" required>
+			        	<option>Administrador</option>
+			        	<option>Inversionista</option>
+			        	<option>Contador</option>
+			        	<option>Arquitecto</option>
+			        	<option>Ingeniero</option>
+			        	<option>Empleado</option>
+					</select>
+			    </div>
+		</div>
+	</div>
+
+	<br>
+	<br>
+	<br>			
+	<br>
+	<br>
+	<br>
+
+	<div class="form-group">
+			      <div class="col-lg-10 col-lg-offset-5">
+			      {% if usuarios %}
+			        <button type="submit" class="btn btn-primary">Editar Usuario</button>
+			      {% else %}
+			      	<button type="submit" class="btn btn-primary" disabled>Editar Usuario</button>
+			      {% endif %}
+			      </div>
+			    </div>
+			    </div>
+
+		</form>
+		{% if message %}
+		<h1>{{message}}</h1>
+		 {% endif %}
+	</fieldset>
+</div>
+{% endblock %}

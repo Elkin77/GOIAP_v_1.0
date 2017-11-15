@@ -1,0 +1,64 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block menu %}
+<nav class="menu">
+	<a href="#">Usuarios</a>	
+	<a href="#">Permisos</a>
+	<a href="#">Documentos</a>
+	<a href="#">Obra</a>
+</nav>
+{% endblock %}
+{% block content %}
+
+<center><legend>Lista de Usuarios</legend></center>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr class="danger estiloTabla" bgcolor= "black">
+				<td>ID</td>
+				<td>USUARIO</td>
+				<td>NOMBRE</td>
+				<td>APELLIDO</td>
+				<td>CORREO</td>
+				<td>IS_ACTIVE</td>
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listUsuarios %}
+			{% for usuarios in listUsuarios %}
+			<tr>
+				<td>{{usuarios.id}}</td>
+				<td>{{usuarios.username}}</td>
+				<td>{{usuarios.first_name}}</td>
+				<td>{{usuarios.last_name}}</td>
+				<td>{{usuarios.email}}</td>
+				<td>{{usuarios.is_active}}</td>
+				<td><a href="{{usuarios.id}}/editarUsuarios">Editar</a></td>	
+				<td><a href="{{usuarios.id}}/eliminarUsuarios">Eliminar</a></td>	
+
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>
+
+		
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
