@@ -3,6 +3,11 @@
 {% block title %}Administrador GOIAP {% endblock %}
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
+<script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
+  <!-- <script src="{% static 'js/jQuery.js' %}"></script> -->
+<script src="{% static 'js/ScriptsGeneral.js' %}"></script>
+<script src="{% static 'js/ScriptsIndex.js' %}"></script>
+<script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
 {% endblock %}
 {% block iconos %}
 <nav class="iconos">
@@ -10,6 +15,14 @@
 </nav>
 {% endblock %}
 {% block contenido %}
+
+{% if message %}
+		<div class="alert alert-dismissible alert-danger alerta" id="advertencia">
+			<button type="button" class="close" id="cerrar" data-dismiss="alert">&times;</button>
+			<strong>Ok, Registro Exitoso!</strong> 
+		</div>
+{% endif %}
+
 <div class="contenedorAgregar">
 	<fieldset>
 		<legend>Registrar Usuario</legend>
@@ -19,19 +32,19 @@
 			<div class="left">
 				<div class="form-group">
 					<label for="usuario" class="control-label control labels">Usuario</label>
-					<input type="text" class="form-control control form" id="usuario" name="username" placeholder="Usuario">
+					<input type="text" class="form-control control form" id="usuario" name="username" placeholder="Usuario" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
 					<label for="nombre" class="control-label control labels">Nombre</label>
-					<input type="text" class="form-control control form" id="nombre" name="first_name" placeholder="Nombre">
+					<input type="text" class="form-control control form" id="nombre" name="first_name" placeholder="Nombre" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
 					<label for="Apellido" class="control-label control labels">Apellido</label>
-					<input type="text" class="form-control control form" id="apellido" name="last_name" placeholder="Apellido">
+					<input type="text" class="form-control control form" id="apellido" name="last_name" placeholder="Apellido" required>
 				</div>
 			</div>
 			<div class="left">
@@ -43,7 +56,7 @@
 			<div class="left">
 				<div class="form-group">
 					<label for="password" class="control-label control labels">Contrase&ntilde;a</label>
-					<input type="password" class="form-control control form" id="password" name="password1" placeholder="Contrase&ntilde;a">
+					<input type="password" class="form-control control form" id="password" name="password1" placeholder="Contrase&ntilde;a" required>
 				</div>
 			</div>
 			<div class="left">

@@ -19,25 +19,25 @@
 			<div class="left">
 				<div class="form-group">
 					<label for="id" class="control-label control labels">ID</label>
-					<input type="text" class="form-control control form" id="id" name="id" value="{{usuarios.id}}">
+					<input type="text" class="form-control control form" id="id" name="id" value="{{usuarios.id}}" disabled="disabled">
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
 					<label for="usuario" class="control-label control labels">Usuario</label>
-					<input type="text" class="form-control control form" id="usuario" name="username" value="{{usuarios.username}}">
+					<input type="text" class="form-control control form" id="usuario" name="username" value="{{usuarios.username}}" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
 					<label for="nombre" class="control-label control labels">Nombre</label>
-					<input type="text" class="form-control control form" id="nombre" name="first_name" value="{{usuarios.first_name}}">
+					<input type="text" class="form-control control form" id="nombre" name="first_name" value="{{usuarios.first_name}}" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
 					<label for="Apellido" class="control-label control labels">Apellido</label>
-					<input type="text" class="form-control control form" id="apellido" name="last_name" value="{{usuarios.last_name}}">
+					<input type="text" class="form-control control form" id="apellido" name="last_name" value="{{usuarios.last_name}}" required>
 				</div>
 			</div>
 			<div class="left">
@@ -49,7 +49,16 @@
 			<div class="left">
 				<div class="form-group">
 					<label for="password" class="control-label control labels">Contrase&ntilde;a</label>
-					<input type="password" class="form-control control form" id="password" name="password" value="{{usuarios.password}}">
+					<input type="password" class="form-control control form" id="password" name="password" value="{{usuarios.password}}" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="is_active" class="control-label control labels">Activo</label>
+					<select class="form-control control form" id="is_active" name="is_active">
+						<option>True</option>
+						<option>False</option>
+					</select><br>
 				</div>
 			</div>
 			<div class="left">

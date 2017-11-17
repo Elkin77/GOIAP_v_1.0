@@ -9,6 +9,8 @@ from apps.user.models import Perfil
 from django.views.generic import CreateView, TemplateView
 from django.core.urlresolvers import reverse_lazy
 from apps.administrador.forms import RegistroForm
+from itertools import chain
+from django.db.models import F
 
 # Create your views here.
 @login_required
@@ -30,86 +32,117 @@ def validarSesion(request):
 
 		return True
 
-
+@login_required
 def registrarUsuario_view(request):
-    if request.method == "POST":
+    if validarSesion(request):
+        message=None
+        if request.method == "POST":
+                   
+            perfil=Perfil()
+          
+            try:
+                nombreusuario = request.POST['username']
+                email=request.POST['email']
+                password = request.POST['password1']
+                firstName = request.POST['first_name']
+                lastName = request.POST['last_name']
+
+                user = User.objects.create_user(username=nombreusuario,
+                                                email=email,
+                                                password=password,
+                                                first_name=firstName,
+                                                last_name=lastName)
+
+                user.is_staff = True
+                user.save()
                
-        perfil=Perfil()
-      
-        try:
-            nombreusuario = request.POST['username']
-            email=request.POST['email']
-            password = request.POST['password1']
-            firstName = request.POST['first_name']
-            lastName = request.POST['last_name']
-
-            user = User.objects.create_user(username=nombreusuario,
-                                            email=email,
-                                            password=password,
-                                            first_name=firstName,
-                                            last_name=lastName)
-
-            user.is_staff = True
-            user.save()
-           
-            nameuser =User.objects.filter(username=request.POST['username'])
-            usuario1 = User.objects.get(pk=nameuser[0].id)
-            perfil.fk_authUser=usuario1 
-            perfil.rol= request.POST['rol']
-            perfil.save()
-            return redirect('registrarUsuarios')  
-        except KeyError:
-            datosUser=KeyError
-            context={'datosUser':datosUser}
-            return render(request,"administrador/registrar_usuarios.html")
+                nameuser =User.objects.filter(username=request.POST['username'])
+                usuario1 = User.objects.get(pk=nameuser[0].id)
+                perfil.fk_authUser=usuario1 
+                perfil.rol= request.POST['rol']
+                perfil.save()
+                message="Ok, Usuario Registrado!"
+                context = {'message':message}
+                return render(request,'administrador/registrar_usuarios.html', context)
+                return redirect('registrarUsuarios')  
+            except KeyError:
+                datosUser=KeyError
+                context={'datosUser':datosUser}
+                return render(request,"administrador/registrar_usuarios.html")
     
 
-    return render(request,'administrador/registrar_usuarios.html')
-
-
-
-def listaUsuarios_view(request):
-    usuarios= User.objects.all()
-    contexto = {'listUsuarios':usuarios}
-    return render(request,'administrador/lista_usuarios.html', contexto)
-
-
-def eliminarUsuario_view(request, usuario_id):
-    user=User.objects.get(pk=usuario_id)
-    perfil = Perfil.objects.get(fk_authUser=usuario_id)
-    user.delete()
-    perfil.delete()
-    return redirect("listaUsuarios")
-
-
-def editarUsuario_view(request, usuario_id):
- 
-    message=None
-    
-    usuarios=User.objects.get(pk=usuario_id)
-    perfiles = Perfil.objects.get(fk_authUser = usuario_id)
-
-
-
-    if request.method=="POST":
-
-        userU = request.POST['username']
-        firstName= request.POST['first_name']
-        lastName = request.POST['last_name']
-        email = request.POST['email']
-
-        usuarios.username = userU
-        usuarios.first_name = firstName
-        usuarios.last_name = lastName
-        usuarios.email = email
-
-        usuarios.save()
-
-        perfiles.rol=request.POST['rol']
-        perfiles.save()
-        context={'perfiles':perfiles,'message':message}
-       	return redirect("listaUsuarios")
+        return render(request,'administrador/registrar_usuarios.html')
 
     else:
-        context={'usuarios':usuarios}
-        return render(request,'administrador/editar_usuarios.html',context)
+        logout(request)
+        return redirect('index')
+
+
+
+@login_required
+def listaUsuarios_view(request):
+    if validarSesion(request):
+        usuarios= User.objects.all()
+        #perfiles = Perfil.objects.all()
+        #mixed_list = list(chain(usuarios, perfiles))
+        usuario_mixed=[]
+        for i in range(len(usuarios)):
+            user=User.objects.get(pk=usuarios[i].id)
+            perfiles = Perfil.objects.get(fk_authUser = user)
+            aux={'id':usuarios[i].id,'username':usuarios[i].username,'first_name':usuarios[i].first_name,'last_name':usuarios[i].last_name,'email':usuarios[i].email,'is_active':usuarios[i].is_active,'rol':perfiles.rol}
+            usuario_mixed.append(aux)
+
+        contexto = {'listUsuarios':usuario_mixed}
+        return render(request,'administrador/lista_usuarios.html', contexto)
+    else:
+        logout(request)
+        return redirect('index')
+
+
+@login_required
+def eliminarUsuario_view(request, usuario_id):
+    if validarSesion(request):
+        user=User.objects.get(pk=usuario_id)
+        perfil = Perfil.objects.get(fk_authUser=usuario_id)
+        user.delete()
+        perfil.delete()
+        return redirect("listaUsuarios")
+    else:
+        logout(request)
+        return redirect('index')
+
+
+@login_required
+def editarUsuario_view(request, usuario_id):
+    if validarSesion(request):
+        message=None
+        usuarios=User.objects.get(pk=usuario_id)
+        perfiles = Perfil.objects.get(fk_authUser = usuario_id)
+        if request.method=="POST":
+
+            userU = request.POST['username']
+            firstName= request.POST['first_name']
+            lastName = request.POST['last_name']
+            email = request.POST['email']
+            activacion = request.POST['is_active']
+
+            usuarios.username = userU
+            usuarios.first_name = firstName
+            usuarios.last_name = lastName
+            usuarios.email = email
+            usuarios.is_active = activacion
+
+            usuarios.save()
+
+            perfiles.rol=request.POST['rol']
+            perfiles.save()
+            context={'perfiles':perfiles,'message':message}
+            return redirect("listaUsuarios")
+
+        else:
+            context={'usuarios':usuarios}
+            return render(request,'administrador/editar_usuarios.html',context)
+    else:
+        logout(request)
+        return redirect('index')
+

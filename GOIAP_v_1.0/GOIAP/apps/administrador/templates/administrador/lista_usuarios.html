@@ -20,15 +20,18 @@
 {% block contenido %}
 
 <center><legend>Lista de Usuarios</legend></center>
-	<table class="table table-striped table-hover">
+	<table>
 		<thead>
-			<tr class="danger estiloTabla" bgcolor= "black">
+			<tr>
 				<td>ID</td>
 				<td>USUARIO</td>
 				<td>NOMBRE</td>
 				<td>APELLIDO</td>
 				<td>CORREO</td>
-				<td>IS_ACTIVE</td>
+				<td>ACTIVO</td>
+				<td>ROL</td>
+				<td>EDITAR</td>
+				<td>ELIMINAR</td>
 				
 			</tr>
 
@@ -43,8 +46,9 @@
 				<td>{{usuarios.last_name}}</td>
 				<td>{{usuarios.email}}</td>
 				<td>{{usuarios.is_active}}</td>
-				<td><a href="{{usuarios.id}}/editarUsuarios">Editar</a></td>	
-				<td><a href="{{usuarios.id}}/eliminarUsuarios">Eliminar</a></td>	
+				<td>{{usuarios.rol}}</td>
+				<td><a class="button orange radius" href="{{usuarios.id}}/editarUsuarios">Editar</a></td>	
+				<td><a class="button orange radius" href="{{usuarios.id}}/eliminarUsuarios">Eliminar</a></td>	
 
 			</tr>
 			{% endfor %}
