@@ -82,18 +82,30 @@ def registrarUsuario_view(request):
 @login_required
 def listaUsuarios_view(request):
     if validarSesion(request):
-        usuarios= User.objects.all()
-        #perfiles = Perfil.objects.all()
-        #mixed_list = list(chain(usuarios, perfiles))
-        usuario_mixed=[]
-        for i in range(len(usuarios)):
-            user=User.objects.get(pk=usuarios[i].id)
-            perfiles = Perfil.objects.get(fk_authUser = user)
-            aux={'id':usuarios[i].id,'username':usuarios[i].username,'first_name':usuarios[i].first_name,'last_name':usuarios[i].last_name,'email':usuarios[i].email,'is_active':usuarios[i].is_active,'rol':perfiles.rol}
-            usuario_mixed.append(aux)
+        if request.method=="POST" and request.POST['rolfilter'] != 'Todos':
+            perfiles = Perfil.objects.filter(rol = request.POST['rolfilter'])
+            
 
-        contexto = {'listUsuarios':usuario_mixed}
-        return render(request,'administrador/lista_usuarios.html', contexto)
+            usuario_mixed=[]
+            for i in range(len(perfiles)):
+                usuarios=User.objects.get(username=perfiles[i].fk_authUser)
+                aux={'id':usuarios.id,'username':usuarios.username,'first_name':usuarios.first_name,'last_name':usuarios.last_name,'email':usuarios.email,'is_active':usuarios.is_active,'rol':request.POST['rolfilter']}
+                usuario_mixed.append(aux)
+
+            contexto = {'listUsuarios':usuario_mixed}
+            return render(request,'administrador/lista_usuarios.html', contexto)
+
+        else:
+            usuarios= User.objects.all()
+            usuario_mixed=[]
+            for i in range(len(usuarios)):
+                user=User.objects.get(pk=usuarios[i].id)
+                perfiles = Perfil.objects.get(fk_authUser = user)
+                aux={'id':usuarios[i].id,'username':usuarios[i].username,'first_name':usuarios[i].first_name,'last_name':usuarios[i].last_name,'email':usuarios[i].email,'is_active':usuarios[i].is_active,'rol':perfiles.rol}
+                usuario_mixed.append(aux)
+
+            contexto = {'listUsuarios':usuario_mixed}
+            return render(request,'administrador/lista_usuarios.html', contexto)
     else:
         logout(request)
         return redirect('index')

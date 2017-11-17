@@ -19,6 +19,41 @@
 {% endblock %}
 {% block contenido %}
 
+<form action="" method="POST">
+{% csrf_token %}
+
+<table>
+	<thead>
+		<tr>
+			<td>
+				<label class="control-label control labels" for="rolfilter">Rol</label>
+			</td>
+			<td>
+					<select class="form-control control form" id="rolfilter" name="rolfilter">
+						<option>Todos</option>
+						<option>Administrador</option>
+						<option>Inversionista</option>
+						<option>Contador</option>
+						<option>Arquitecto</option>
+						<option>Ingeniero</option>
+						<option>Empleado</option></select>
+		</td>
+		<td>
+				
+					<input type="submit" class="button orange" name="filtrar" value="filtrar">
+				
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		</tr>
+</form>
+		
+	</thead>
+</table>
+
+<br>
 <center><legend>Lista de Usuarios</legend></center>
 	<table>
 		<thead>
