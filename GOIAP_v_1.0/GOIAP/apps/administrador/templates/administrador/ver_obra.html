@@ -1,0 +1,99 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+{% if listObras %}
+{% for obras in listObras %}
+<center><h1>{{obras.nombre}}</h1></center>
+<center><img src='{{ obras.imagen.url }}' width="300px" height="300px"></center>
+<br>
+<center><a class="button orange radius" href="{{obras.id}}/editarObras">Editar</a>
+<a class="button orange radius" href="{{obras.id}}/eliminarObras">Eliminar</a>
+<a class="buttonTwo orange radius" href="#">Registrar Empleado</a>
+</center>
+<br>
+
+{% endfor %}
+{% else %}
+<h1>no hay registros</h1>
+{% endif %}
+
+	<table>
+		<thead>
+			<tr>
+				<td>NOMBRE</td>
+				<td>DIRECCIÓN</td>
+				<td>TIPO</td>
+				<td>ESTADO</td>
+				<td># APARTAMENTOS</td>
+				<td>FECHA INICIO</td>
+				<td>FECHA FIN</td>
+				<td>USUARIO CREADOR</td>
+				
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listObras %}
+			{% for obras in listObras %}
+			<tr>
+				<td>{{obras.nombre}}</td>
+				<td>{{obras.direccion}}</td>
+				<td>{{obras.tipo}}</td>
+				<td>{{obras.estado}}</td>
+				<td>{{obras.nroApartamentos}}</td>
+				<td>{{obras.fechaInicio}}</td>
+				<td>{{obras.fechaFin}}</td>
+				<td>{{obras.fk_administrador_id}}</td>
+
+			</tr>
+			
+		</tbody>
+	</table>
+		
+		<br>
+<center><legend>Avances de Obra</legend></center>
+		<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>NOMBRE</td>
+				<td>TIPO</td>
+				<td>FECHA</td>
+				<td>IMAGEN</td>
+				<td>HORAS EMPLEADAS</td>
+				<td>DESCRIPCION</td>
+				<td>EMPLEADO</td>
+				
+				
+			</tr>
+
+		</thead>
+		
+	</table>
+	<br>
+	<br>
+
+
+		{% endfor %}
+		{% else %}
+		<h1>no hay registros</h1>
+		{% endif %}	
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

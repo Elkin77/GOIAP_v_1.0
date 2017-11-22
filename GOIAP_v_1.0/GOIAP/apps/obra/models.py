@@ -12,8 +12,8 @@ class Obra (models.Model):
 	nroApartamentos = models.IntegerField()
 	fechaInicio = models.DateField()
 	fechaFin = models.DateField(null=True)
-	imagen = models.CharField(max_length=50)
-	fk_administrador = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
+	imagen = models.FileField(null=True, upload_to='obra/Imagenes/')
+	fk_administrador_id = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.nombre

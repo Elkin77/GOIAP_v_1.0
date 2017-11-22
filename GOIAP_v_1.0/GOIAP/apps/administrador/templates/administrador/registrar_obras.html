@@ -9,10 +9,9 @@
 <script src="{% static 'js/ScriptsIndex.js' %}"></script>
 <script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
 {% endblock %}
-{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
 <nav class="iconos">
-	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </nav>
 {% endblock %}
 {% block contenido %}
@@ -27,7 +26,7 @@
 <div class="contenedorAgregar">
 	<fieldset>
 		<legend>Registrar Nueva Obra</legend>
-		<form action="" method="POST">
+		<form action="" method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
 			{{ form.as_p}}
 			<div class="left">
@@ -50,8 +49,13 @@
 			</div>
 			<div class="left">
 				<div class="form-group">
-					<label for="estado" class="control-label control labels">Estado</label>
-					<input type="text" class="form-control control form" id="estado" name="estado" placeholder="Estado">
+					<label for="rol" class="control-label control labels">ESTADO</label>
+					<select class="form-control control form" id="estado" name="estado"">
+						<option>Inicio de Obra</option>
+						<option>En construcción</option>
+						<option>Finalizando Obra</option>
+						<option>Obra terminada</option>
+					</select><br>
 				</div>
 			</div>
 			<div class="left">
@@ -67,7 +71,12 @@
 					<input type="date" class="form-control control form" id="fecha" name="fecha" required>
 				</div>
 			</div>
-			
+			<div class="left">
+				<div class="form-group">
+					<label for="imagen" class="control-label control labels">Imagen</label>
+					<input type="file" class="control form" id="imagen" name="imagen" required>
+				</div>
+			</div>
 			<div class="form-group">
 				<div class="col-lg-10 col-lg-offset-2">
 					<input type="submit" class="btn btn-default boton" name="guardar" value="Guardar">

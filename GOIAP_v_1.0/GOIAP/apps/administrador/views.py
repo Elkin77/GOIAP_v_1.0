@@ -96,8 +96,10 @@ def registrarObra_view(request):
                 obraNew.nroApartamentos = request.POST['nroapartamentos']
                 obraNew.fechaInicio = request.POST['fecha']
                 user=User.objects.get(pk=request.session["id"])
-                perfil=Perfil.objects.get(fk_authUser=user)
-                obraNew.fk_administrador = perfil
+                perfil=Perfil.objects.get(fk_authUser=user.id)
+
+                obraNew.fk_administrador_id = perfil
+                obraNew.imagen = request.FILES['imagen']
                 obraNew.save()
                 message="Ok, Usuario Registrado!"
                 context = {'message':message}
@@ -148,6 +150,26 @@ def listaUsuarios_view(request):
 
 
 @login_required
+def listaObras_view(request):
+    if validarSesion(request):
+        obras = Obra.objects.all()
+        
+        usuario_mixed=[]
+        for i in range(len(obras)):
+            users=User.objects.get(username=obras[i].fk_administrador_id.fk_authUser)
+            
+            aux={'id':obras[i].id,'nombre':obras[i].nombre,'direccion':obras[i].direccion,'tipo':obras[i].tipo,'estado':obras[i].estado,'nroApartamentos':obras[i].nroApartamentos,'fechaInicio':obras[i].fechaInicio, 'fechaFin':obras[i].fechaFin, 'imagen':obras[i].imagen, 'fk_administrador_id':users.username}
+            usuario_mixed.append(aux)
+
+        contexto = {'listObras':usuario_mixed}
+        return render(request,'administrador/lista_obras.html', contexto)
+
+    else:
+        logout(request)
+        return redirect('index')
+
+
+@login_required
 def eliminarUsuario_view(request, usuario_id):
     if validarSesion(request):
         user=User.objects.get(pk=usuario_id)
@@ -159,6 +181,15 @@ def eliminarUsuario_view(request, usuario_id):
         logout(request)
         return redirect('index')
 
+@login_required
+def eliminarObra_view(request, obra_id):
+    if validarSesion(request):
+        obra=Obra.objects.get(pk=obra_id)
+        obra.delete()
+        return redirect("listaObras")
+    else:
+        logout(request)
+        return redirect('index')
 
 @login_required
 def editarUsuario_view(request, usuario_id):
@@ -194,3 +225,52 @@ def editarUsuario_view(request, usuario_id):
         logout(request)
         return redirect('index')
 
+@login_required
+def editarObra_view(request, obra_id):
+    if validarSesion(request):
+        message=None
+        obras=Obra.objects.get(pk=obra_id)
+        
+        if request.method=="POST":
+
+            nombreObra = request.POST['nombre']
+            direccionObra= request.POST['direccion']
+            tipoObra= request.POST['tipo']
+            estadoObra= request.POST['estado']
+            apartamentosObra = request.POST['nroApartamentos']
+            fechaFinObra = request.POST['fechaFin']
+
+            obras.nombre = nombreObra
+            obras.direccion = direccionObra
+            obras.tipo = tipoObra
+            obras.estado = estadoObra
+            obras.nroApartamentos = apartamentosObra
+            obras.fechaFin = fechaFinObra
+            obras.save()
+
+            context={'message':message}
+            return redirect("listaObras")
+
+        else:
+            context={'obras':obras}
+            return render(request,'administrador/editar_obras.html',context)
+    else:
+        logout(request)
+        return redirect('index')
+
+
+@login_required
+def verObra_view(request, obra_id):
+    if validarSesion(request):
+        obras = Obra.objects.get(pk=obra_id)
+        users=User.objects.get(username=obras.fk_administrador_id.fk_authUser)
+        usuario_mixed=[]
+        aux={'id':obras.id,'nombre':obras.nombre,'direccion':obras.direccion,'tipo':obras.tipo,'estado':obras.estado,'nroApartamentos':obras.nroApartamentos,'fechaInicio':obras.fechaInicio, 'fechaFin':obras.fechaFin, 'imagen':obras.imagen, 'fk_administrador_id':users.username}
+        usuario_mixed.append(aux)
+
+        contexto = {'listObras':usuario_mixed}
+        return render(request,'administrador/ver_obra.html', contexto)
+
+    else:
+        logout(request)
+        return redirect('index')
