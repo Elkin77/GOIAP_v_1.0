@@ -61,3 +61,8 @@ def index(request):
 			return render(request,'user/Index.html', context)
 	else:#debo mostrar mi sistema de noticias
 		return render(request,'user/Index.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('index')

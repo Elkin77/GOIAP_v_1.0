@@ -9,9 +9,10 @@
 <script src="{% static 'js/ScriptsIndex.js' %}"></script>
 <script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
 {% endblock %}
+{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
 <nav class="iconos">
-	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </nav>
 {% endblock %}
 {% block contenido %}

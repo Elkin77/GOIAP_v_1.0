@@ -37,9 +37,14 @@ header .logo img{
 }
 
 
+header ul{
+	float: right;
+	list-style: none;
+}
+
 header nav{
 	float: right;
-	line-height: 100px
+	line-height: 100px;
 }
 
 header .iconos a{
@@ -57,7 +62,8 @@ header .iconos a{
 }
 /*Estilos si en vez de tener iconos, tiene letras*/
 header .menu a{
-	display: inline-block;
+	display: block;
+	background-color: #252932;
 	color: #B08A04;
 	text-decoration: none;
 	padding: 10px 20px;
@@ -67,12 +73,39 @@ header .menu a{
 	-webkit-transition: all 500ms ease;
 	-o-transition: all 500ms ease;
 	transition: all 500ms ease;
+}
+
+header .menu .linksPrincipal{
 	border-radius: 50px;
 }
+
+header .menu li ul{
+	display:none;
+	position: absolute;
+	min-width: 140px;
+}
+
+header .menu li:hover > ul{
+	display: block;
+}
+
+header .menu > li{
+	float: left;
+	margin-top: 25px;
+}
+
+header .menu li ul li { 
+	position:relative; 
+} 
+
+header .menu li ul li ul { 
+	right:-215px; 
+	top:0px; 
+} 
+
 /*Esto se pasara a los estilos del index de cada Usuario*/
 header .menu a:hover{
 	background: #B08A04;
-	display: flex;
 	color: #252932;
 }
 
