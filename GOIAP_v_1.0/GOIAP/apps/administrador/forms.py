@@ -1,25 +1,34 @@
 from django import forms
 from apps.user.models import Perfil
+from apps.obra.models import Obra
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 
-class RegistroForm(UserCreationForm):
 
+class ObraForm(forms.ModelForm):
 	class Meta:
-		model = User
+		model = Obra
 		fields = [
+				'nombre',
+				'direccion',
+				'tipo',
+				'estado',
+				'nroApartamentos',
 
-				'username',
-				'first_name',
-				'last_name',
-				'email',
 		]
 		labels = {
-				'username': 'Usuario',
-				'first_name': 'Nombre',
-				'last_name': 'Apellidos',
-				'email': 'Correo'	,	
+				'nombre': 'Nombre de Obra',
+				'direccion': 'Direccion',
+				'tipo': 'Tipo de Obra',
+				'estado': 'Estado de Obra',
+				'nroApartamentos': 'Nro Apartamentos',
+		}
 
-
+		widgets = {
+				'nombre': forms.TextInput(attrs={'class':'form-control'}),
+				'direccion': forms.TextInput(attrs={'class':'form-control'}),
+				'tipo': forms.TextInput(attrs={'class':'form-control'}),
+				'estado': forms.TextInput(attrs={'class':'form-control'}),
+				'nroApartamentos': forms.NumberInput(attrs={'class':'form-control'})
 		}

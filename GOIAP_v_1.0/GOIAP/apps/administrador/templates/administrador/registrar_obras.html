@@ -1,0 +1,79 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
+<script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
+  <!-- <script src="{% static 'js/jQuery.js' %}"></script> -->
+<script src="{% static 'js/ScriptsGeneral.js' %}"></script>
+<script src="{% static 'js/ScriptsIndex.js' %}"></script>
+<script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
+{% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+{% if message %}
+		<div class="alert alert-dismissible alert-danger alerta" id="advertencia">
+			<button type="button" class="close" id="cerrar" data-dismiss="alert">&times;</button>
+			<strong>Ok, Registro Exitoso!</strong> 
+		</div>
+{% endif %}
+
+<div class="contenedorAgregar">
+	<fieldset>
+		<legend>Registrar Nueva Obra</legend>
+		<form action="" method="POST">
+			{% csrf_token %}
+			{{ form.as_p}}
+			<div class="left">
+				<div class="form-group">
+					<label for="nombre" class="control-label control labels">Nombre Obra</label>
+					<input type="text" class="form-control control form" id="nombre" name="nombre" placeholder="Nombre de la Obra" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="direccion" class="control-label control labels">Dirección</label>
+					<input type="text" class="form-control control form" id="direccion" name="direccion" placeholder="Dirección" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="tipo" class="control-label control labels">Tipo de Obra</label>
+					<input type="text" class="form-control control form" id="tipo" name="tipo" placeholder="Tipo de Obra" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="estado" class="control-label control labels">Estado</label>
+					<input type="text" class="form-control control form" id="estado" name="estado" placeholder="Estado">
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="nroapartamentos" class="control-label control labels"># Apartamentos</label>
+					<input type="number" class="form-control control form" id="nroapartamentos" name="nroapartamentos" min="1" max="50"  required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="fecha" class="control-label control labels">Fecha de Inicio</label>
+					<input type="date" class="form-control control form" id="fecha" name="fecha" required>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-lg-10 col-lg-offset-2">
+					<input type="submit" class="btn btn-default boton" name="guardar" value="Guardar">
+				</div>
+			</div>
+
+		</form>
+	</fieldset>
+</div>
+{% endblock %}

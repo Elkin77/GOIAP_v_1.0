@@ -6,12 +6,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from apps.user.models import Perfil
+from apps.obra.models import Obra
 from django.views.generic import CreateView, TemplateView
 from django.core.urlresolvers import reverse_lazy
-from apps.administrador.forms import RegistroForm
+from apps.administrador.forms import ObraForm
 from itertools import chain
 from django.db.models import F
-
+from datetime import datetime
 # Create your views here.
 @login_required
 def indexAdmin(request):
@@ -72,6 +73,41 @@ def registrarUsuario_view(request):
     
 
         return render(request,'administrador/registrar_usuarios.html')
+
+    else:
+        logout(request)
+        return redirect('index')
+
+
+
+@login_required
+def registrarObra_view(request):
+    if validarSesion(request):
+        message=None
+        if request.method == "POST":
+                   
+            obraNew=Obra()
+          
+            try:
+                obraNew.nombre = request.POST['nombre']
+                obraNew.direccion=request.POST['direccion']
+                obraNew.tipo = request.POST['tipo']
+                obraNew.estado = request.POST['estado']
+                obraNew.nroApartamentos = request.POST['nroapartamentos']
+                obraNew.fechaInicio = request.POST['fecha']
+                user=User.objects.get(pk=request.session["id"])
+                perfil=Perfil.objects.get(fk_authUser=user)
+                obraNew.fk_administrador = perfil
+                obraNew.save()
+                message="Ok, Usuario Registrado!"
+                context = {'message':message}
+                return render(request,'administrador/registrar_obras.html', context)
+                return redirect('registrarObras')  
+            except KeyError:
+                datosUser=KeyError
+                context={'datosUser':datosUser}
+                return render(request,"administrador/registrar_obras.html")
+        return render(request,'administrador/registrar_obras.html')
 
     else:
         logout(request)
