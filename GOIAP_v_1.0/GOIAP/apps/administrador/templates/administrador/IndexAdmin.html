@@ -4,16 +4,33 @@
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
 {% endblock %}
+{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
 <nav class="iconos">
-	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </nav>
 {% endblock %}
 {% block menu %}
-<nav class="menu">
-	<a href="#">Usuarios</a>	
-	<a href="#">Permisos</a>
-	<a href="#">Documentos</a>
-	<a href="#">Obra</a>
-</nav>
+<ul class="menu">
+	<li><a href="#" class="linksPrincipal">Usuarios</a>
+		<ul>
+			<li><a href="{% url 'registrarUsuarios' %}">Registrar Usuarios</a></li>
+			<li><a href="{% url 'listaUsuarios' %}">Gestionar Usuarios</a></li>
+		</ul>
+	</li>	
+	<li><a href="#" class="linksPrincipal">Permisos</a>
+	</li>
+	<li><a href="#" class="linksPrincipal">Documentos</a>
+		<ul>
+			<li><a href="#">Subir Documento</a></li>
+			<li><a href="#">Gestionar Documentos</a></li>
+		</ul>
+	</li>
+	<li><a href="#" class="linksPrincipal">Obra</a>
+		<ul>
+			<li><a href="#">Crear Obra</a></li>
+			<li><a href="#">Gestionar Obra</a></li>
+		</ul>
+	</li>
+</ul>
 {% endblock %}
