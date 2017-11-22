@@ -4,9 +4,10 @@
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosIndexArquitecto.css' %}">
 {% endblock %}
+{% block imagen%} <a href="{% url 'indexArquitecto' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
 <nav class="iconos">
-	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </nav>
 {% endblock %}
 {% block contenido %}
