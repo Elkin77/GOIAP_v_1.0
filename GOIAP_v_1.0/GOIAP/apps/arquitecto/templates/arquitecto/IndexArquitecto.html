@@ -10,6 +10,23 @@
 	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </nav>
 {% endblock %}
+{% block menu %}
+<ul class="menu">
+	<li><a href="#" class="linksPrincipal">Documentos de Obra</a>
+		<ul>
+			<li><a href="#">Cargar Documento</a></li>
+			<li><a href="#">Gestionar Documentos</a></li>
+			<li><a href="#">Consultar Observaciones</a></li>
+		</ul>
+	</li>	
+	<li><a href="#" class="linksPrincipal">Inventario</a>
+		<ul>
+			<li><a href="#">Crear Inventario</a></li>
+			<li><a href="#">Gestionar Inventario</a></li>
+		</ul>
+	</li>
+</ul>
+{% endblock %}
 {% block contenido %}
 <div class="contenedorGeneral">
 	<fieldset>

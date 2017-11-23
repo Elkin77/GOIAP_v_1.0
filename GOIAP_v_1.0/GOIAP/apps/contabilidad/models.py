@@ -21,7 +21,7 @@ class Nomina(models.Model):
 	total_devengado = models.CharField(max_length=50)
 	total_deducciones = models.CharField(max_length=50)
 	neto_pagar = models.CharField(max_length=50)
-	archivo = models.CharField(max_length=50)
+	archivo = models.FileField(upload_to='contabilidad/Documentos/')
 	fecha = models.DateField()
 	fk_empleado = models.ForeignKey(EmpleadoUser, null=True, blank=True, on_delete=models.CASCADE)
 

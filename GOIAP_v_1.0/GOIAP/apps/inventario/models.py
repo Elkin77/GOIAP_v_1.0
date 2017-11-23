@@ -25,5 +25,5 @@ class Contenido(models.Model):
 	fecha_ingreso = models.DateField()
 	estado = models.CharField(max_length=50)
 	descripcion = models.CharField(max_length=300)
-	imagen = models.CharField(max_length=100)
+	imagen = models.FileField(upload_to='inventario/Imagenes/')
 	fk_inventario = models.ForeignKey(Inventario, null=True, blank=True, on_delete=models.CASCADE)

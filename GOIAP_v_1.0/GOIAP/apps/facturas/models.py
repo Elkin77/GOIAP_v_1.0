@@ -11,5 +11,5 @@ class Factura(models.Model):
 	valor = models.CharField(max_length=50)
 	fecha = models.DateField()
 	descripcion = models.CharField(max_length=50)
-	imagen = models.CharField(max_length=50)
+	imagen = models.FileField(upload_to='facturas/Imagenes/')
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
