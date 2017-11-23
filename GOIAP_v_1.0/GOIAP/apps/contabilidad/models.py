@@ -1,5 +1,7 @@
 from django.db import models
-
+from django.db.models.signals import pre_delete, post_delete
+from django.dispatch import receiver
+from django.conf import settings
 from apps.empleado.models import EmpleadoUser
 
 # Create your models here.
@@ -25,6 +27,12 @@ class Nomina(models.Model):
 	fecha = models.DateField()
 	fk_empleado = models.ForeignKey(EmpleadoUser, null=True, blank=True, on_delete=models.CASCADE)
 
+@receiver(pre_delete, sender=Nomina)
+def _directorios_delete(sender, instance, using, **kwargs):
+	file_path = settings.MEDIA_ROOT +'/'+ str(instance.archivo)
+	print(file_path)
+	if os.path.isfile(file_path):
+		os.remove(file_path)
 
 class Cuenta_cobro(models.Model):
 	pagador = models.CharField(max_length=50)
