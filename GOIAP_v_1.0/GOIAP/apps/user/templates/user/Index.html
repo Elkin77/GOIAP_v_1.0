@@ -3,6 +3,8 @@
 {% block title %}GOIAP{% endblock %} 
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosIndex.css' %}">
+<script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
+<script src="{% static 'js/ScriptsGeneral.js' %}"></script>
 {% endblock %}
 {% block imagen%} <a href="{% url 'index' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
@@ -11,6 +13,12 @@
 </nav>
 {% endblock %}
 {% block contenido %}
+{% if message %}
+		<div class="alert alert-dismissible alert-danger" id="advertencia">
+			<button type="button" class="close" id="cerrar" data-dismiss="alert">&times;</button>
+			<strong>{{message}}</strong> 
+		</div>
+{% endif %}
 <div id="formLogin">
 	<fieldset>
 		<form action="" method="post">{% csrf_token %}

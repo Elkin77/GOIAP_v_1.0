@@ -86,19 +86,6 @@
 	margin-left: 32%;
 }
 
-
-
-.alert.alert-dismissible.alert-danger.alerta{
-	background: #f09609;
-	color: #fff;
-	position: absolute;
-	left: 30%;
-	top: 20%;
-}
-.alert.alert-dismissible.alert-danger.alerta .alert-link{
-	color: #000;
-}
-
 footer{
 	position: absolute;
 	top: 611px;
