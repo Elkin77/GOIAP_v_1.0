@@ -4,5 +4,10 @@ from apps.user import views as user_views
 
 urlpatterns = [
     url(r'^$',views.indexIngeniero, name='indexIngeniero'),
+    url(r'cargarDocumento/', views.cargarDocumento, name="cargarDocumento"),
+    url(r'(?P<documento_id>[0-9]+)/eliminarDocumento$',views.eliminarDocumento,name='eliminarDocumento'),
+    url(r'(?P<documento_id>[0-9]+)/editarDocumento$',views.editarDocumento,name='editarDocumento'),
+    url(r'gestionarDocumentos/', views.gestionarDocumentos, name="gestionarDocumentos"),
+    url(r'consultarObservaciones/', views.consultarObservaciones, name="consultarObservaciones"),
     url(r'logout/$',user_views.logout_view, name='logout'),
 ]

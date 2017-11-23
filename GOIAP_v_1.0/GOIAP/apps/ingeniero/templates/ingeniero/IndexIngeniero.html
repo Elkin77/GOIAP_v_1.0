@@ -1,5 +1,6 @@
 {% extends 'user/base/Base.html' %}
 {% load staticfiles %}
+{% block title %}Ingeniero GOIAP{% endblock %}
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosIndexIngeniero.css' %}">
 {% endblock %}
@@ -8,4 +9,15 @@
 <nav class="iconos">
 	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </nav>
+{% endblock %}
+{% block menu %}
+<ul class="menu">
+	<li><a href="#" class="linksPrincipal">Documentos de Obra</a>
+		<ul>
+			<li><a href="{% url 'cargarDocumento' %}">Cargar Documento</a></li>
+			<li><a href="{% url 'gestionarDocumentos' %}">Gestionar Documentos</a></li>
+			<li><a href="{% url 'consultarObservaciones' %}">Consultar Observaciones</a></li>
+		</ul>
+	</li>	
+</ul>
 {% endblock %}

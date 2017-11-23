@@ -8,7 +8,6 @@ from apps.user.models import Perfil, Asignaciones
 from apps.obra.models import Obra
 from apps.documentos.models import Documento_arquitectura
 from datetime import datetime
-import os
 
 
 # Create your views here.
@@ -130,6 +129,16 @@ def eliminarDocumento(request, documento_id):
 		documentoArquitectura=Documento_arquitectura.objects.get(pk=documento_id)
 		documentoArquitectura.delete()
 		return redirect('gestionarDocumentos')
+	else:
+		logout(request)
+		return redirect('index')
+
+@login_required
+def consultarObservaciones(request):
+	if validarSesion(request):
+		documentoArquitectura=Documento_arquitectura.objects.filter(fk_arquitecto=request.session['id'])
+		context={'listDocumentos':documentoArquitectura}
+		return render(request,'arquitecto/consultarObservaciones.html',context)
 	else:
 		logout(request)
 		return redirect('index')
