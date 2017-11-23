@@ -26,53 +26,71 @@
 
 <div class="contenedorAgregar">
 	<fieldset>
-		<legend>Registrar Usuario</legend>
+		<legend>Registrar Empleados</legend>
 		<form action="" method="POST">
 			{% csrf_token %}
 			{{ form.as_p}}
 			<div class="left">
 				<div class="form-group">
-					<label for="usuario" class="control-label control labels">Usuario</label>
-					<input type="text" class="form-control control form" id="usuario" name="username" placeholder="Usuario" required>
-				</div>
-			</div>
-			<div class="left">
-				<div class="form-group">
 					<label for="nombre" class="control-label control labels">Nombre</label>
-					<input type="text" class="form-control control form" id="nombre" name="first_name" placeholder="Nombre" required>
+					<input type="text" class="form-control control form" id="nombre" name="nombre" placeholder="Nombre Empleado" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
-					<label for="Apellido" class="control-label control labels">Apellido</label>
-					<input type="text" class="form-control control form" id="apellido" name="last_name" placeholder="Apellido" required>
+					<label for="cargo" class="control-label control labels">Cargo</label>
+					<input type="text" class="form-control control form" id="cargo" name="cargo" placeholder="Cargo" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
-					<label for="email" class="control-label control labels">Email</label>
-					<input type="email" class="form-control control form" id="email" name="email" placeholder="Email">
+					<label for="documento" class="control-label control labels">Documento</label>
+					<input type="text" class="form-control control form" id="documento" name="documento" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
-					<label for="password" class="control-label control labels">Contrase&ntilde;a</label>
-					<input type="password" class="form-control control form" id="password" name="password1" placeholder="Contrase&ntilde;a" required>
+					<label for="salario" class="control-label control labels">Salario</label>
+					<input type="text" class="form-control control form" id="salario" name="salario">
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
-					<label for="rol" class="control-label control labels">Rol</label>
-					<select class="form-control control form" id="rol" name="rol">
-						<option>Administrador</option>
-						<option>Inversionista</option>
-						<option>Contador</option>
-						<option>Arquitecto</option>
-						<option>Ingeniero</option>
-						<option>Empleado</option>
+					<label for="fecha" class="control-label control labels">Fecha Ingreso</label>
+					<input type="date" class="form-control control form" id="fecha" name="fecha" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="telefono" class="control-label control labels">Telefono</label>
+					<input type="tel" class="form-control control form" id="telefono" name="telefono">
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="rh" class="control-label control labels">RH</label>
+					<select class="form-control control form" id="rh" name="rh">
+						<option>A+</option>
+						<option>A-</option>
+						<option>O+</option>
+						<option>O-</option>
+						<option>B+</option>
+						<option>B-</option>
+						<option>AB+</option>
+						<option>AB-</option>
 					</select><br>
 				</div>
 			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="corre" class="control-label control labels">Correo</label>
+					<input type="email" class="form-control control form" id="correo" name="correo">
+				</div>
+			</div>
+
 			<div class="form-group">
 				<div class="col-lg-10 col-lg-offset-2">
 					<input type="submit" class="btn btn-default boton" name="guardar" value="Guardar">

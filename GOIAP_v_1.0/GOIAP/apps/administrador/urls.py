@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'(?P<obra_id>[0-9]+)/verObras$',views.verObra_view,name='verObras'),
     url(r'(?P<obra_id>[0-9]+)/eliminarObras$',views.eliminarObra_view,name='eliminarObras'),
     url(r'(?P<obra_id>[0-9]+)/editarObras$',views.editarObra_view,name='editarObras'),
+    url(r'(?P<obra_id>[0-9]+)/registrarEmpleados$',views.registrarEmpleados_view,name='registrarEmpleados'),
 
 ]
 

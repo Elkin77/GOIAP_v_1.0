@@ -5,16 +5,12 @@ from apps.user.models import Perfil
 
 
 class EmpleadoUser(models.Model):
-	fk_Perfil = models.OneToOneField(Perfil, on_delete=models.CASCADE)
+	nombre = models.CharField(max_length=45)
 	cargo = models.CharField(max_length=50)
 	documento = models.CharField(max_length=100)
 	salario = models.CharField(max_length=50)
 	fecha_ingreso = models.DateField()
 	telefono = models.CharField(max_length=50)
 	rh = models.CharField(max_length=45)
-	permisos_documentos = models.BooleanField()
-	permisos_facturas = models.BooleanField()
-	permisos_inventarios = models.BooleanField()
-	permisos_empleados = models.BooleanField()
-	permisos_obras = models.BooleanField()
+	correo=models.CharField(null=True,max_length=50)
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)

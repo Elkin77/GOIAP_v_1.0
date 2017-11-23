@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from apps.user.models import Perfil
 from apps.obra.models import Obra
+from apps.empleado.models import EmpleadoUser
 from django.views.generic import CreateView, TemplateView
 from django.core.urlresolvers import reverse_lazy
 from apps.administrador.forms import ObraForm
@@ -114,6 +115,42 @@ def registrarObra_view(request):
     else:
         logout(request)
         return redirect('index')
+
+
+@login_required
+def registrarEmpleados_view(request, obra_id):
+    if validarSesion(request):
+        message=None
+        if request.method == "POST":
+                   
+            empleados=EmpleadoUser()
+          
+            try:
+                empleados.nombre = request.POST['nombre']
+                empleados.cargo=request.POST['cargo']
+                empleados.documento = request.POST['documento']
+                empleados.salario = request.POST['salario']
+                empleados.fecha_ingreso = request.POST['fecha']
+                empleados.telefono = request.POST['telefono']
+                empleados.rh = request.POST['rh']
+                empleados.correo = request.POST['correo']
+                obra=Obra.objects.get(pk=obra_id)
+                empleados.fk_obra_id=obra.id
+                empleados.save()
+                message="Ok, Usuario Registrado!"
+                context = {'message':message}
+                return render(request,'administrador/registrar_empleados.html', context)
+                return redirect('registrarEmpleados')  
+            except KeyError:
+                datosUser=KeyError
+                context={'datosUser':datosUser}
+                return render(request,"administrador/registrar_empleados.html")
+        return render(request,'administrador/registrar_empleados.html')
+
+    else:
+        logout(request)
+        return redirect('index')
+
 
 
 
@@ -264,11 +301,12 @@ def verObra_view(request, obra_id):
     if validarSesion(request):
         obras = Obra.objects.get(pk=obra_id)
         users=User.objects.get(username=obras.fk_administrador_id.fk_authUser)
+        empleados = EmpleadoUser.objects.filter(fk_obra_id = obra_id)
         usuario_mixed=[]
         aux={'id':obras.id,'nombre':obras.nombre,'direccion':obras.direccion,'tipo':obras.tipo,'estado':obras.estado,'nroApartamentos':obras.nroApartamentos,'fechaInicio':obras.fechaInicio, 'fechaFin':obras.fechaFin, 'imagen':obras.imagen, 'fk_administrador_id':users.username}
         usuario_mixed.append(aux)
 
-        contexto = {'listObras':usuario_mixed}
+        contexto = {'listObras':usuario_mixed, 'listEmpleados':empleados}
         return render(request,'administrador/ver_obra.html', contexto)
 
     else:

@@ -19,7 +19,7 @@
 <br>
 <center><a class="button orange radius" href="{{obras.id}}/editarObras">Editar</a>
 <a class="button orange radius" href="{{obras.id}}/eliminarObras">Eliminar</a>
-<a class="buttonTwo orange radius" href="#">Registrar Empleado</a>
+<a class="buttonTwo orange radius" href="{{obras.id}}/registrarEmpleados">Registrar Empleado</a>
 </center>
 <br>
 
@@ -58,7 +58,10 @@
 				<td>{{obras.fk_administrador_id}}</td>
 
 			</tr>
-			
+			{% endfor %}
+		{% else %}
+		<h1>no hay registros</h1>
+		{% endif %}	
 		</tbody>
 	</table>
 		
@@ -82,14 +85,52 @@
 		</thead>
 		
 	</table>
-	<br>
-	<br>
+			<br>
+<center><legend>Empleados</legend></center>
+		<table>
+		<thead>
+			<tr>
+				
+				<td>NOMBRE</td>
+				<td>CARGO</td>
+				<td>DOCUMENTO</td>
+				<td>SALARIO</td>
+				<td>FECHA INICIO</td>
+				<td>TELEFONO</td>
+				<td>RH</td>
+				<td>CORREO</td>
+				
+				
+			</tr>
 
+		</thead>
+		<tbody>
+			{% if listEmpleados %}
+			{% for empleados in listEmpleados %}
+			<tr>
+				<td>{{empleados.nombre}}</td>
+				<td>{{empleados.cargo}}</td>
+				<td>{{empleados.documento}}</td>
+				<td>{{empleados.salario}}</td>
+				<td>{{empleados.fecha_ingreso}}</td>
+				<td>{{empleados.telefono}}</td>
+				<td>{{empleados.rh}}</td>
+				<td>{{empleados.correo}}</td>
 
-		{% endfor %}
+			</tr>
+
+				{% endfor %}
 		{% else %}
 		<h1>no hay registros</h1>
 		{% endif %}	
+			
+		</tbody>
+		
+	</table>
+
+	<br>
+	<br>
+		
 	</fieldset>
 </div>
 
