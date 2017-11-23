@@ -1,0 +1,114 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+<link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
+<script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
+  <!-- <script src="{% static 'js/jQuery.js' %}"></script> -->
+<script src="{% static 'js/ScriptsGeneral.js' %}"></script>
+<script src="{% static 'js/ScriptsIndex.js' %}"></script>
+<script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+{% if listUsuarios %}
+		
+		<center><h1>{{listUsuarios.first_name}} ({{listUsuarios.username}}) </h1></center>
+		
+		
+		{% endif %}
+
+{% if message %}
+		<div class="alert alert-dismissible alert-success alerta" id="advertencia">
+			<button type="button" class="close" id="cerrar" data-dismiss="alert">&times;</button>
+			<strong>Ok, Registro Exitoso!</strong> 
+		</div>
+{% endif %}
+
+	<fieldset>
+		<legend>Asignar Nueva Obra</legend>
+		
+		<form action="" method="POST">
+			{% csrf_token %}
+
+			<table>
+	<thead>
+		<tr>
+			<td>
+				<label for="obra" class="control-label control labels">Obra:</label>
+			</td>	
+			<td>
+				{% if listObras %}
+					
+					<select class="form-control control form" id="obra" name="obra" required>
+					{% for obras in listObras %}
+			        	<option value="{{obras.id}}">{{obras.nombre}}</option>
+			        {% endfor%}
+			        </select>
+			{% endif %}
+			</td>
+
+			<td>
+				<label for="descripcion" class="control-label control labels">Descripción:</label>
+			</td>	
+			<td>		
+				<textarea class="control-label control labels" rows="6" cols="35" name="descripcion" placeholder="Ingrese la descripción Aquí" style="margin: 0px; width: 241px; height: 60px;"></textarea>
+			</td>
+			<td>
+				<input type="submit" class="btn btn-default boton" name="guardar" value="Guardar">
+			</td>
+		
+			</form>
+		
+		</thead>
+	</table>
+</fieldset>
+
+<br>
+<br>
+
+<center><legend>Obras Asignadas</legend></center>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>FECHA DE ASIGNACIÓN</td>
+				<td>OBRA</td>
+				<td>DESCRIPCIÓN</td>
+				<td>ELIMINAR</td>
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listAsignaciones %}
+			{% for obras in listAsignaciones %}
+			<tr>
+				<td>{{obras.id}}</td>
+				<td>{{obras.fecha_solicitud}}</td>
+				<td>{{obras.id_obra}}</td>
+				<td>{{obras.descripcion}}</td>	
+				<td><a class="button orange radius" href="{{obras.id}}/eliminarAsignacion">Eliminar</a></td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>	
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

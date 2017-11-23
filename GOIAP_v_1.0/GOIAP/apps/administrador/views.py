@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from apps.user.models import Perfil
+from apps.user.models import Perfil, Asignaciones
 from apps.obra.models import Obra
 from apps.empleado.models import EmpleadoUser
 from django.views.generic import CreateView, TemplateView
@@ -228,6 +228,19 @@ def eliminarObra_view(request, obra_id):
         logout(request)
         return redirect('index')
 
+
+@login_required
+def eliminarAsignacion_view(request, user_id):
+    if validarSesion(request):
+        asignation=Asignaciones.objects.get(pk=user_id)
+        asignation.delete()
+        return redirect("listaUsuarios")
+    else:
+        logout(request)
+        return redirect('index')
+
+
+
 @login_required
 def editarUsuario_view(request, usuario_id):
     if validarSesion(request):
@@ -312,3 +325,43 @@ def verObra_view(request, obra_id):
     else:
         logout(request)
         return redirect('index')
+
+
+
+@login_required
+def asignarObras_view(request, user_id):
+    if validarSesion(request):
+        message=None
+        if request.method == "POST":
+            asignacion=Asignaciones()
+            try:
+                asignacion.fecha_solicitud = datetime.now()
+                asignacion.descripcion = request.POST['descripcion']
+                usuario=Perfil.objects.get(pk=user_id)
+                asignacion.perfil=usuario
+                asignacion.id_obra=request.POST['obra']
+                asignacion.save()
+                message="Ok, Usuario Registrado!"
+                context = {'message':message}
+                return redirect('listaUsuarios')    
+            except KeyError:
+                datosUser=KeyError
+                context={'datosUser':datosUser}
+                return render(request,"administrador/asignar_obras.html",context)
+
+        else:
+            asignation = Asignaciones.objects.filter(perfil = user_id)
+            obra_mixed=[]
+            for i in range(len(asignation)):
+                obra=Obra.objects.get(pk=asignation[i].id_obra)
+                aux={'id':asignation[i].id,'fecha_solicitud':asignation[i].fecha_solicitud,'id_obra':obra.nombre,'descripcion':asignation[i].descripcion}
+                obra_mixed.append(aux)
+            users = User.objects.get(pk=user_id)
+            obras = Obra.objects.all()
+            context={'listAsignaciones':obra_mixed, 'listUsuarios':users, 'listObras':obras}
+            return render(request,'administrador/asignar_obras.html',context)
+        
+
+    else:
+        logout(request)
+        return redirect('index')        

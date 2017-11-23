@@ -44,13 +44,10 @@ def cargarReporte_view(request):
 				reporte.descripcion = request.POST['descripcion']
 
 				user=User.objects.get(pk=request.session["id"])
-				
 				perfil=Perfil.objects.get(fk_authUser=user.id)
-				reporte.fk_empleado_id=perfil
-				reporte_id = Obra.objects.get(id = request.POST['obra'])
-				reporte.fk_obra_id=reporte_id
-
-				
+				reporte.fk_empleado = perfil
+				reporte_id = Obra.objects.get(pk=request.POST['obra'])
+				reporte.fk_obra=reporte_id
 				reporte.save()
 				message="Ok, Usuario Registrado!"
 				context = {'message':message}

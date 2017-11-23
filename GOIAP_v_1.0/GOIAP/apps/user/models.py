@@ -14,4 +14,4 @@ class Asignaciones(models.Model):
 	perfil = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 	fecha_solicitud = models.DateField()
 	id_obra = models.IntegerField()
-	descripcion = models.CharField(null=True, max_length=100)
+	descripcion = models.CharField(null=True, max_length=300)
