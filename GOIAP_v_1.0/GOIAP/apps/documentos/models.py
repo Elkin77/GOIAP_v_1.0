@@ -1,4 +1,8 @@
 from django.db import models
+from django.db.models.signals import pre_delete, post_delete
+from django.dispatch import receiver
+from django.conf import settings
+import os
 from apps.obra.models import Obra
 from apps.user.models import Perfil
 # Create your models here.
@@ -18,6 +22,14 @@ class Documento_arquitectura(models.Model):
 	fk_arquitecto = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 
 
+@receiver(pre_delete, sender=Documento_arquitectura)
+def _directorios_delete(sender, instance, using, **kwargs):
+	file_path = settings.MEDIA_ROOT +'/'+ str(instance.archivo)
+	print(file_path)
+	if os.path.isfile(file_path):
+		os.remove(file_path)
+
+
 class Documento_ingenieria(models.Model):
 	nombre = models.CharField(max_length=50)	
 	tipo_doc = models.CharField(max_length=50)
@@ -29,6 +41,13 @@ class Documento_ingenieria(models.Model):
 	observacion = models.CharField(max_length=300)
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
 	fk_ingeniero = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
+
+@receiver(pre_delete, sender=Documento_ingenieria)
+def _directorios_delete(sender, instance, using, **kwargs):
+	file_path = settings.MEDIA_ROOT +'/'+ str(instance.archivo)
+	print(file_path)
+	if os.path.isfile(file_path):
+		os.remove(file_path)
 
 
 class Documento_contable(models.Model):
@@ -43,6 +62,13 @@ class Documento_contable(models.Model):
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
 	fk_contador = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 
+@receiver(pre_delete, sender=Documento_contable)
+def _directorios_delete(sender, instance, using, **kwargs):
+	file_path = settings.MEDIA_ROOT +'/'+ str(instance.archivo)
+	print(file_path)
+	if os.path.isfile(file_path):
+		os.remove(file_path)
+
 
 class Reporte(models.Model):
 	nombre = models.CharField(max_length=50)
@@ -53,4 +79,11 @@ class Reporte(models.Model):
 	descripcion = models.CharField(max_length=300)
 	observacion = models.CharField(null=True, max_length=300)
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
-	fk_empleado = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)	
+	fk_empleado = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
+
+@receiver(pre_delete, sender=Reporte)
+def _directorios_delete(sender, instance, using, **kwargs):
+	file_path = settings.MEDIA_ROOT +'/'+ str(instance.imagen)
+	print(file_path)
+	if os.path.isfile(file_path):
+		os.remove(file_path)

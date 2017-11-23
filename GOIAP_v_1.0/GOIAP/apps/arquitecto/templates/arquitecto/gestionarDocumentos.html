@@ -1,3 +1,95 @@
 {% extends 'user/base/Base.html' %}
 {% load staticfiles %}
 {% block title %}Arquitecto GOIAP{% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosBaseTablas.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexArquitecto' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+<!-- <form action="" method="POST">
+{% csrf_token %}
+
+<table>
+	<thead>
+		<tr>
+			<td>
+				<label class="control-label control labels" for="rolfilter">Rol</label>
+			</td>
+			<td>
+					<select class="form-control control form" id="rolfilter" name="rolfilter">
+						<option>Todos</option>
+						<option>Administrador</option>
+						<option>Inversionista</option>
+						<option>Contador</option>
+						<option>Arquitecto</option>
+						<option>Ingeniero</option>
+						<option>Empleado</option></select>
+		</td>
+		<td>
+				
+					<input type="submit" class="button orange" name="filtrar" value="filtrar">
+				
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		</tr>
+</form> -->
+		
+	</thead>
+</table>
+
+<br>
+<center><legend>Lista de Documentos Cargados</legend></center>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>NOMBRE</td>
+				<td>FECHA CARGA</td>
+				<td>DESCRIPCION</td>
+				<td>OBRA</td>
+				<td>EDITAR</td>
+				<td>ELIMINAR</td>
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listDocumentos %}
+			{% for documentos in listDocumentos %}
+			<tr>
+				<td>{{documentos.id}}</td>
+				<td><a href="{{documentos.archivo.url}}">{{documentos.nombre}}</a></td>
+				<td>{{documentos.fecha_carga}}</td>
+				<td>{{documentos.descripcion}}</td>
+				<td>{{documentos.fk_obra}}</td>
+				<td><a class="button orange radius" href="{{documentos.id}}/editarDocumento">Editar</a></td>	
+				<td><a class="button orange radius" href="{{documentos.id}}/eliminarDocumento">Eliminar</a></td>	
+
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>
+
+		
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
