@@ -5,4 +5,5 @@ from apps.user import views as user_views
 urlpatterns = [
     url(r'^$',views.indexEmpleado, name='indexEmpleado'),
     url(r'logout/$',user_views.logout_view, name='logout'),
+    url(r'^cargarReporte/$',views.cargarReporte_view, name='cargarReporte'),
 ]

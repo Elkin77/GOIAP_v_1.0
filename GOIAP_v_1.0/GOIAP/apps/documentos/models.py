@@ -47,10 +47,10 @@ class Documento_contable(models.Model):
 class Reporte(models.Model):
 	nombre = models.CharField(max_length=50)
 	tipo_reporte = models.CharField(max_length=50)
-	fecha_carga = models.DateField()
-	imagen = models.FileField(upload_to='documentos/Reporte/Imagenes/')
+	fecha_carga = models.DateField(null=True)
+	imagen = models.FileField(null=True, upload_to='documentos/Imagenes/')
 	horas_empleadas = models.IntegerField()
 	descripcion = models.CharField(max_length=300)
-	observacion = models.CharField(max_length=300)
+	observacion = models.CharField(null=True, max_length=300)
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
 	fk_empleado = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)	
