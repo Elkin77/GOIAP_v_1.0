@@ -24,3 +24,12 @@ def validarSesion(request):
 		return False
 	else:
 		return True
+
+@login_required
+def cargarDocumento_view(request):
+	return render(request,'arquitecto/cargarDocumento.html')
+
+@login_required
+def gestionarDocumentos_view(request):
+	return render(request,'arquitecto/gestionarDocumentos.html')
+	

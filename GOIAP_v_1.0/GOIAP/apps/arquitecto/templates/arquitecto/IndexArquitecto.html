@@ -14,7 +14,7 @@
 <ul class="menu">
 	<li><a href="#" class="linksPrincipal">Documentos de Obra</a>
 		<ul>
-			<li><a href="#">Cargar Documento</a></li>
+			<li><a href="{% url 'cargarDocumento' %}">Cargar Documento</a></li>
 			<li><a href="#">Gestionar Documentos</a></li>
 			<li><a href="#">Consultar Observaciones</a></li>
 		</ul>
@@ -26,18 +26,4 @@
 		</ul>
 	</li>
 </ul>
-{% endblock %}
-{% block contenido %}
-<div class="contenedorGeneral">
-	<fieldset>
-		<legend>Proveedor</legend>
-		<div class="der">
-			<a href="#" class="btn btn-default botonGeneral">Documentos De Obra</a>
-		</div>
-		<div class="izq">
-			<a href="#" class="btn btn-default botonGeneral">Inventario</a>
-		</div>
-	</fieldset>
-</div>
-
 {% endblock %}
