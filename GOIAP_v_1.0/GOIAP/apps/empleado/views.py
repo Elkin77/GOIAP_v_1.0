@@ -3,12 +3,13 @@ from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from apps.user.models import Perfil
+from apps.user.models import Perfil, Asignaciones
 from apps.obra.models import Obra
 from apps.documentos.models import Reporte
 from django.contrib.auth import authenticate, login, logout
 from .models import EmpleadoUser
 from datetime import datetime
+
 
 # Create your views here.
 @login_required
@@ -51,16 +52,22 @@ def cargarReporte_view(request):
 				reporte.save()
 				message="Ok, Usuario Registrado!"
 				context = {'message':message}
-				return render(request,'empleado/cargar_reporte.html', context)
-				return redirect('cargarReporte')	
+				return redirect('indexEmpleado')	
 			except KeyError:
 				datosUser=KeyError
 				context={'datosUser':datosUser}
 				return render(request,"empleado/cargar_reporte.html",context)
 
 		else:
-			obras = Obra.objects.all()
-			context={'listObras':obras}
+			asignation = Asignaciones.objects.filter(perfil = request.session["id"])	
+			
+			obra_mixed=[]
+			for i in range(len(asignation)):
+				obra=Obra.objects.get(pk=asignation[i].id_obra)
+				aux={'id':asignation[i].id_obra,'nombre':obra.nombre}
+				obra_mixed.append(aux)
+
+			context={'listObras':obra_mixed}
 			return render(request,'empleado/cargar_reporte.html',context)
 		
 

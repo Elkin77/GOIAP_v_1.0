@@ -69,19 +69,32 @@
 			        </select>
 			    </div>
 			</div>
+
+			{% else %}
+			<div class="left">
+			    <div class="form-group">
+					<label for="obra" class="control-label control labels">Obra:</label>
+					<select class="form-control control form" id="obra" name="obra" required>
+					
+			        	<option>Sin Obras Asignadas</option>
+			        
+			        </select>
+			    </div>
+			</div>
 			{% endif %}
 			<div class="left">
 				<div class="form-group">
-						<label for="descripcion" class="control-label control labels">Descripcion</label>
+						<label for="descripcion" class="control-label control labels">Descripción</label>
 							<textarea class="control-label control labels" rows="6" cols="35" name="descripcion" placeholder="Ingrese la descripción Aquí" style="margin: 0px; width: 264px; height: 101px;"></textarea>
 					</div>
 			</div>
+			{% if listObras %}
 			<div class="form-group">
 				<div class="col-lg-10 col-lg-offset-2">
 					<input type="submit" class="btn btn-default boton" name="guardar" value="Cargar">
 				</div>
 			</div>
-
+			{% endif %}
 		</form>
 	</fieldset>
 </div>

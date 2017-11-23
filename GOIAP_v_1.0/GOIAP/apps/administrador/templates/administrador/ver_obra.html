@@ -19,7 +19,7 @@
 <br>
 <center><a class="button orange radius" href="{{obras.id}}/editarObras">Editar</a>
 <a class="button orange radius" href="{{obras.id}}/eliminarObras">Eliminar</a>
-<a class="buttonTwo orange radius" href="{{obras.id}}/registrarEmpleados">Registrar Empleado</a>
+<a class="buttonTwo orange radius" href="{{obras.id}}/registrarEmpleados">Registrar Trabajador</a>
 </center>
 <br>
 
@@ -70,23 +70,43 @@
 		<table>
 		<thead>
 			<tr>
+				<td>IMAGEN</td>
 				<td>ID</td>
 				<td>NOMBRE</td>
 				<td>TIPO</td>
 				<td>FECHA</td>
-				<td>IMAGEN</td>
 				<td>HORAS EMPLEADAS</td>
-				<td>DESCRIPCION</td>
-				<td>EMPLEADO</td>
+				<td>DESCRIPCIÓN</td>
+				<td>CREADOR</td>
+				<td>OBSERVACIONES</td>
 				
 				
 			</tr>
 
 		</thead>
-		
+
+		<tbody>
+			{% if listReportes %}
+			{% for reporte in listReportes %}
+			<tr>
+				<td><img src='{{ reporte.imagen.url }}' width="100px" height="100px" ></td>
+				<td>{{reporte.id}}</td>
+				<td>{{reporte.nombre}}</td>
+				<td>{{reporte.tipo_reporte}}</td>
+				<td>{{reporte.fecha_carga}}</td>
+				<td>{{reporte.horas_empleadas}}</td>
+				<td>{{reporte.descripcion}}</td>
+				<td>{{reporte.fk_empleado_id}}</td>
+				<td><a class="buttonTwo orange radius" href="{{obras.id}}/eliminarAsignacion">Observaciones</a></td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>	
 	</table>
 			<br>
-<center><legend>Empleados</legend></center>
+<center><legend>Trabajadores</legend></center>
 		<table>
 		<thead>
 			<tr>

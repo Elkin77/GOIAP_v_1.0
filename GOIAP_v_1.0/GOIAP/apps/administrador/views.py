@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from apps.user.models import Perfil, Asignaciones
 from apps.obra.models import Obra
+from apps.documentos.models import Reporte
 from apps.empleado.models import EmpleadoUser
 from django.views.generic import CreateView, TemplateView
 from django.core.urlresolvers import reverse_lazy
@@ -312,14 +313,24 @@ def editarObra_view(request, obra_id):
 @login_required
 def verObra_view(request, obra_id):
     if validarSesion(request):
+        reportes = Reporte.objects.filter(fk_obra_id = obra_id)
         obras = Obra.objects.get(pk=obra_id)
         users=User.objects.get(username=obras.fk_administrador_id.fk_authUser)
         empleados = EmpleadoUser.objects.filter(fk_obra_id = obra_id)
         usuario_mixed=[]
+        reportes_mixed2=[]
         aux={'id':obras.id,'nombre':obras.nombre,'direccion':obras.direccion,'tipo':obras.tipo,'estado':obras.estado,'nroApartamentos':obras.nroApartamentos,'fechaInicio':obras.fechaInicio, 'fechaFin':obras.fechaFin, 'imagen':obras.imagen, 'fk_administrador_id':users.username}
         usuario_mixed.append(aux)
 
-        contexto = {'listObras':usuario_mixed, 'listEmpleados':empleados}
+        for i in range(len(reportes)):
+                user=User.objects.get(pk=reportes[i].fk_empleado_id)
+                print(reportes[i].tipo_reporte)
+                print("**************")
+                print("**************")
+                aux2={'imagen':reportes[i].imagen,'id':reportes[i].id,'nombre':reportes[i].nombre,'tipo_reporte':reportes[i].tipo_reporte,'fecha_carga':reportes[i].fecha_carga,'horas_empleadas':reportes[i].horas_empleadas,'descripcion':reportes[i].descripcion,'fk_empleado_id':user.username}
+                reportes_mixed2.append(aux2)
+
+        contexto = {'listObras':usuario_mixed, 'listEmpleados':empleados, 'listReportes':reportes_mixed2}
         return render(request,'administrador/ver_obra.html', contexto)
 
     else:
