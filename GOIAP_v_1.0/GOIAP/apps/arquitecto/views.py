@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from apps.user.models import Perfil, Asignaciones
 from apps.obra.models import Obra
 from apps.documentos.models import Documento_arquitectura
+from apps.inventario.models import Inventario
 from datetime import datetime
 
 
@@ -155,7 +156,20 @@ def crearInventario(request):
 		user=User.objects.get(pk=request.session["id"])
 		perfil=Perfil.objects.get(fk_authUser=user)
 		if request.method=='POST':
-			return render(request,'arquitecto/crearInventario.html')
+			inventario=Inventario()
+			inventario.nombre=request.POST['nombre']
+			inventario.tipo_inventario=request.POST['tipoInventario']
+			inventario.fecha_creacion=datetime.now()
+			inventario.estado=request.POST['estado']
+			inventario.descripcion=request.POST['descripcion']
+			inventario.nro_articulos=request.POST['nroArticulos']
+			obra=Obra.objects.get(pk=request.POST['obra'])
+			inventario.fk_obra=obra
+
+			inventario.save()
+			message="Ok, Inventario Creado!"
+			context = {'message':message}
+			return render(request,'arquitecto/crearInventario.html',context)
 		else:
 			asignaciones=Asignaciones.objects.filter(perfil=perfil)
 			obraPerfil=[]
@@ -172,7 +186,17 @@ def crearInventario(request):
 @login_required
 def gestionarInventario(request):
 	if validarSesion(request):
-		return render(request,'arquitecto/gestionarInventario.html')
+		user=User.objects.get(pk=request.session["id"])
+		perfil=Perfil.objects.get(fk_authUser=user)
+		asignaciones=Asignaciones.objects.filter(perfil=perfil)
+		inventarios=[]
+		context=None
+		for i in range(len(asignaciones)):
+			inventario=Inventario.objects.filter(fk_obra=asignaciones[i].id_obra)
+			for j in range(len(inventario)):
+				inventarios.append(inventario[j])
+		context={'listInventarios':inventarios}
+		return render(request,'arquitecto/gestionarInventario.html',context)
 	else:
 		logout(request)
 		return redirect('index')
@@ -181,7 +205,30 @@ def gestionarInventario(request):
 @login_required
 def editarInventario(request, inventario_id):
 	if validarSesion(request):
-		return render(request,'arquitecto/editarInventario.html')
+		user=User.objects.get(pk=request.session["id"])
+		perfil=Perfil.objects.get(fk_authUser=user)
+		inventario=Inventario.objects.get(pk=inventario_id)
+		if request.method=='POST':
+			inventario.nombre=request.POST['nombre']
+			inventario.tipo_inventario=request.POST['tipoInventario']
+			inventario.fecha_creacion=datetime.now()
+			inventario.estado=request.POST['estado']
+			inventario.descripcion=request.POST['descripcion']
+			inventario.nro_articulos=request.POST['nroArticulos']
+			obra=Obra.objects.get(pk=request.POST['obra'])
+			inventario.fk_obra=obra
+
+			inventario.save()
+			return redirect('gestionarInventarioArquitecto')
+		else:
+			asignaciones=Asignaciones.objects.filter(perfil=perfil)
+			obraPerfil=[]
+			context=None
+			for i in range(len(asignaciones)):
+				obra=Obra.objects.get(pk=asignaciones[i].id_obra)
+				obraPerfil.append(obra)
+			context={'inventario':inventario,'listObras':obraPerfil}
+			return render(request,'arquitecto/editarInventario.html', context)
 	else:
 		logout(request)
 		return redirect('index')
@@ -189,7 +236,9 @@ def editarInventario(request, inventario_id):
 @login_required
 def eliminarInventario(request, inventario_id):
 	if validarSesion(request):
-		return render(request,'arquitecto/eliminarInventario.html')
+		inventario=Inventario.objects.get(pk=inventario_id)
+		inventario.delete()
+		return redirect('gestionarInventarioArquitecto')
 	else:
 		logout(request)
 		return redirect('index')

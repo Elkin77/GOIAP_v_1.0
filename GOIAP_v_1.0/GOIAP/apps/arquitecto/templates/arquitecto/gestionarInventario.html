@@ -1,0 +1,69 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexArquitecto.css' %}">
+<link rel="stylesheet" href="{% static 'css/EstilosBaseTablas.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexArquitecto' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+<center><legend>Lista de Inventarios</legend></center>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>NOMBRE</td>
+				<td>TIPO INVENTARIO</td>
+				<td>FECHA CREACION</td>
+				<td>ESTADO</td>
+				<td>DESCRIPCION</td>
+				<td>NUMERO ARTICULOS</td>
+				<td>OBRA</td>
+				<td>EDITAR</td>
+				<td>ELIMINAR</td>
+				
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listInventarios %}
+			{% for inventarios in listInventarios %}
+			<tr>
+				<td>{{inventarios.id}}</td>
+				<td>{{inventarios.nombre}}</td>
+				<td>{{inventarios.tipo_inventario}}</td>
+				<td>{{inventarios.fecha_creacion}}</td>
+				<td>{{inventarios.estado}}</td>
+				<td>{{inventarios.descripcion}}</td>
+				<td>{{inventarios.nro_articulos}}</td>
+				<td>{{inventarios.fk_obra}}</td>
+				<td><a class="button orange radius" href="{{inventarios.id}}/editarInventario">editar</a></td>
+				<td><a class="button orange radius" href="{{inventarios.id}}/eliminarInventario">eliminar</a></td>	
+					
+
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>
+
+		
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
