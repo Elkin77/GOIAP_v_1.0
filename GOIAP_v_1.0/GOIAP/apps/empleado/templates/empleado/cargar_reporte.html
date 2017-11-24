@@ -1,6 +1,6 @@
 {% extends 'user/base/Base.html' %}
 {% load staticfiles %}
-{% block title %}Administrador GOIAP {% endblock %}
+{% block title %}Empleado GOIAP {% endblock %}
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
 <script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
@@ -9,7 +9,7 @@
 <script src="{% static 'js/ScriptsIndex.js' %}"></script>
 <script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
 {% endblock %}
-{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block imagen%} <a href="{% url 'indexEmpleado' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
 <nav class="iconos">
 	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>

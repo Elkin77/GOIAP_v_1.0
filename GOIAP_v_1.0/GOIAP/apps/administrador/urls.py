@@ -20,5 +20,14 @@ urlpatterns = [
     url(r'(?P<user_id>[0-9]+)/asignarObras$',views.asignarObras_view,name='asignarObras'),
     url(r'(?P<user_id>[0-9]+)/eliminarAsignacion$',views.eliminarAsignacion_view,name='eliminarAsignacion'),
     url(r'(?P<reporte_id>[0-9]+)/eliminarReporte$',views.eliminarReporte_view, name='eliminarReporte'),
+    url(r'(?P<obra_id>[0-9]+)/listaDocArquitecto$',views.listaDocArquitectura_view, name='listaDocArquitecto'),
+    url(r'(?P<obra_id>[0-9]+)/listaDocIngenieria$',views.listaDocIngenieria_view, name='listaDocIngenieria'),
+    url(r'(?P<obra_id>[0-9]+)/listaDocContable$',views.listaDocContable_view, name='listaDocContable'),
+    url(r'(?P<obra_id>[0-9]+)/listaInventarios$',views.listaInventarios_view, name='listaInventarios'),
+    url(r'(?P<obra_id>[0-9]+)/facturas$',views.listaFacturas_view, name='facturas'),
+    url(r'(?P<doc_id>[0-9]+)/editarDocArquitectura$',views.editarDocArquitectura_view, name='editarDocArquitectura'),
+    url(r'(?P<doc_id>[0-9]+)/editarDocIngenieria$',views.editarDocIngenieria_view, name='editarDocIngenieria'),
+    url(r'(?P<doc_id>[0-9]+)/editarDocContable$',views.editarDocContable_view, name='editarDocContable'),
+    url(r'(?P<doc_id>[0-9]+)/contenidoInventario$',views.listaContenidoInventario_view, name='contenidoInventario'),
 ]
 

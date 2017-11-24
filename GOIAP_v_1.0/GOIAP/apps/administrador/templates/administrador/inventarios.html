@@ -1,0 +1,61 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+<center><h1>Inventarios</h1></center>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>NOMBRE</td>
+				<td>TIPO</td>
+				<td>FECHA CREACIÓN</td>
+				<td>ESTADO</td>
+				<td>DESCRIPCION</td>
+				<td># ARTICULOS</td>
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listInventarios %}
+			{% for documento in listInventarios %}
+			<tr>
+				<td>{{documento.id}}</td>
+				<td>{{documento.nombre}}</td>
+				<td>{{documento.tipo}}</td>
+				<td>{{documento.fecha_carga}}</td>
+				<td>{{documento.estado}}</td>
+				<td>{{documento.descripcion}}</td>
+				<td>{{documento.nroArticulos}}</td>
+				<td><a class="buttonTwo orange radius" href="{{documento.id}}/contenidoInventario">Ver Contenido</a></td>	
+					
+
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>
+
+		
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

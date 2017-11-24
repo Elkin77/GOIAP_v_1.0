@@ -1,0 +1,64 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+<center><h1>Gastos Generados<h1></center>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>IMAGEN</td>
+				<td>EMPRESA</td>
+				<td>NIT EMPRESA</td>
+				<td>CODIGO FACTURA</td>
+				<td>VALOR</td>
+				<td>FECHA</td>
+				<td>DESCRIPCIÓN</td>
+				
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listFacturas %}
+			{% for documento in listFacturas %}
+			<tr>
+				<td>{{documento.id}}</td>
+				<td><img src='{{ obras.imagen.url }}' width="100px" height="100px" ></td>
+				<td>{{documento.empresa}}</td>
+				<td>{{documento.nit_empresa}}</td>
+				<td>{{documento.codigo_factura}}</td>
+				<td>{{documento.valor}}</td>
+				<td>{{documento.fecha}}</td>
+				<td>{{documento.descripcion}}</td>
+					
+
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>
+
+		
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

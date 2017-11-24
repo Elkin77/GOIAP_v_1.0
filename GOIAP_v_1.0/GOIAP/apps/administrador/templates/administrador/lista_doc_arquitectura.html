@@ -1,0 +1,68 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+<center><legend>Documentos de Arquitectura</legend></center>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>ARCHIVO</td>
+				<td>NOMBRE</td>
+				<td>TIPO</td>
+				<td>FECHA CARGA</td>
+				<td># PÁGINAS</td>
+				<td>ESTADO</td>
+				<td>DESCRIPCION</td>
+				<td>CREADOR</td>
+				<td>OBSERVACIÓN</td>
+				
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listDocumentos %}
+			{% for documento in listDocumentos %}
+			<tr>
+				<td>{{documento.id}}</td>
+				<td><a href="{{documento.archivo.url}}">{{documento.nombre}}</a></td>
+				<td>{{documento.nombre}}</td>
+				<td>{{documento.tipo}}</td>
+				<td>{{documento.fecha_carga}}</td>
+				<td>{{documento.nro_paginas}}</td>
+				<td>{{documento.estado}}</td>
+				<td>{{documento.descripcion}}</td>
+				<td>{{documento.creador}} {{documento.apellido}}</td>
+				<td><a class="buttonTwo orange radius" href="{{documento.id}}/editarDocArquitectura">Observación</a></td>	
+					
+
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>
+
+		
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

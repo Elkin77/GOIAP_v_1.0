@@ -7,8 +7,10 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from apps.user.models import Perfil, Asignaciones
 from apps.obra.models import Obra
-from apps.documentos.models import Reporte
+from apps.documentos.models import Reporte, Documento_arquitectura, Documento_ingenieria, Documento_contable
 from apps.empleado.models import EmpleadoUser
+from apps.inventario.models import Inventario, Contenido
+from apps.facturas.models import Factura
 from django.views.generic import CreateView, TemplateView
 from django.core.urlresolvers import reverse_lazy
 from apps.administrador.forms import ObraForm
@@ -207,6 +209,98 @@ def listaObras_view(request):
         return redirect('index')
 
 
+
+@login_required
+def listaDocArquitectura_view(request, obra_id):
+    if validarSesion(request):
+        documentoArqui = Documento_arquitectura.objects.filter(fk_obra_id=obra_id)
+        
+        doc_mixed=[]
+        for i in range(len(documentoArqui)):
+                user=User.objects.get(pk=documentoArqui[i].fk_arquitecto_id)
+                aux2={'id':documentoArqui[i].id,'nombre':documentoArqui[i].nombre,'tipo':documentoArqui[i].tipo_doc,'fecha_carga':documentoArqui[i].fecha_carga,'archivo':documentoArqui[i].archivo,'nro_paginas':documentoArqui[i].nro_paginas,'estado':documentoArqui[i].estado,'descripcion':documentoArqui[i].descripcion,'creador':user.first_name,'apellido':user.last_name}
+                doc_mixed.append(aux2)
+
+        contexto = {'listDocumentos':doc_mixed}
+        return render(request,'administrador/lista_doc_arquitectura.html', contexto)
+
+    else:
+        logout(request)
+        return redirect('index')
+
+@login_required
+def listaDocIngenieria_view(request, obra_id):
+    if validarSesion(request):
+        documentoArqui = Documento_ingenieria.objects.filter(fk_obra_id=obra_id)
+        
+        doc_mixed=[]
+        for i in range(len(documentoArqui)):
+                user=User.objects.get(pk=documentoArqui[i].fk_ingeniero_id)
+                aux2={'id':documentoArqui[i].id,'nombre':documentoArqui[i].nombre,'tipo':documentoArqui[i].tipo_doc,'fecha_carga':documentoArqui[i].fecha_carga,'archivo':documentoArqui[i].archivo,'nro_paginas':documentoArqui[i].nro_paginas,'estado':documentoArqui[i].estado,'descripcion':documentoArqui[i].descripcion,'creador':user.first_name,'apellido':user.last_name}
+                doc_mixed.append(aux2)
+
+        contexto = {'listDocumentos':doc_mixed}
+        return render(request,'administrador/lista_doc_ingenieria.html', contexto)
+
+    else:
+        logout(request)
+        return redirect('index')
+
+
+@login_required
+def listaDocContable_view(request, obra_id):
+    if validarSesion(request):
+        documentoArqui = Documento_contable.objects.filter(fk_obra_id=obra_id)
+        
+        doc_mixed=[]
+        for i in range(len(documentoArqui)):
+                user=User.objects.get(pk=documentoArqui[i].fk_contador_id)
+                aux2={'id':documentoArqui[i].id,'nombre':documentoArqui[i].nombre,'tipo':documentoArqui[i].tipo_doc,'fecha_carga':documentoArqui[i].fecha_carga,'archivo':documentoArqui[i].archivo,'nro_paginas':documentoArqui[i].nro_paginas,'estado':documentoArqui[i].estado,'descripcion':documentoArqui[i].descripcion,'creador':user.first_name,'apellido':user.last_name}
+                doc_mixed.append(aux2)
+
+        contexto = {'listDocumentos':doc_mixed}
+        return render(request,'administrador/lista_doc_contable.html', contexto)
+
+    else:
+        logout(request)
+        return redirect('index')
+
+@login_required
+def listaInventarios_view(request, obra_id):
+    if validarSesion(request):
+        documentoArqui = Inventario.objects.filter(fk_obra_id=obra_id)
+        contexto = {'listDocumentos':documentoArqui}
+        return render(request,'administrador/inventarios.html', contexto)
+
+    else:
+        logout(request)
+        return redirect('index')
+
+
+@login_required
+def listaContenidoInventario_view(request, inventario_id):
+    if validarSesion(request):
+        inventario = Contenido.objects.filter(fk_inventario_id=inventario_id)
+        contexto = {'listDocumentos':inventario}
+        return render(request,'administrador/contenido_inventario.html', contexto)
+
+    else:
+        logout(request)
+        return redirect('index')
+
+@login_required
+def listaFacturas_view(request, obra_id):
+    if validarSesion(request):
+        facturas = Factura.objects.filter(fk_obra_id=obra_id)
+        contexto = {'listFacturas':facturas}
+        return render(request,'administrador/gastos_generados.html', contexto)
+
+    else:
+        logout(request)
+        return redirect('index')
+
+
+
 @login_required
 def eliminarUsuario_view(request, usuario_id):
     if validarSesion(request):
@@ -321,6 +415,72 @@ def editarObra_view(request, obra_id):
 
 
 @login_required
+def editarDocArquitectura_view(request, doc_id):
+    if validarSesion(request):
+        message=None
+        documento=Documento_arquitectura.objects.get(pk=doc_id)
+        
+        if request.method=="POST":
+
+            obser = request.POST['observacion']
+            documento.observacion = obser
+            documento.save()
+
+            context={'message':message}
+            return redirect("listaObras")
+
+        else:
+            return render(request,'administrador/observaciones_arquitectura.html')
+    else:
+        logout(request)
+        return redirect('index')
+
+
+@login_required
+def editarDocIngenieria_view(request, doc_id):
+    if validarSesion(request):
+        message=None
+        documento=Documento_ingenieria.objects.get(pk=doc_id)
+        
+        if request.method=="POST":
+
+            obser = request.POST['observacion']
+            documento.observacion = obser
+            documento.save()
+
+            context={'message':message}
+            return redirect("listaObras")
+
+        else:
+            return render(request,'administrador/observaciones_arquitectura.html')
+    else:
+        logout(request)
+        return redirect('index')
+
+
+@login_required
+def editarDocContable_view(request, doc_id):
+    if validarSesion(request):
+        message=None
+        documento=Documento_contable.objects.get(pk=doc_id)
+        
+        if request.method=="POST":
+
+            obser = request.POST['observacion']
+            documento.observacion = obser
+            documento.save()
+
+            context={'message':message}
+            return redirect("listaObras")
+
+        else:
+            return render(request,'administrador/observaciones_arquitectura.html')
+    else:
+        logout(request)
+        return redirect('index')
+
+
+@login_required
 def verObra_view(request, obra_id):
     if validarSesion(request):
         reportes = Reporte.objects.filter(fk_obra_id = obra_id)
@@ -334,9 +494,6 @@ def verObra_view(request, obra_id):
 
         for i in range(len(reportes)):
                 user=User.objects.get(pk=reportes[i].fk_empleado_id)
-                print(reportes[i].tipo_reporte)
-                print("**************")
-                print("**************")
                 aux2={'imagen':reportes[i].imagen,'id':reportes[i].id,'nombre':reportes[i].nombre,'tipo_reporte':reportes[i].tipo_reporte,'fecha_carga':reportes[i].fecha_carga,'horas_empleadas':reportes[i].horas_empleadas,'descripcion':reportes[i].descripcion,'fk_empleado_id':user.username}
                 reportes_mixed2.append(aux2)
 

@@ -17,10 +17,15 @@
 <center><h1>{{obras.nombre}}</h1></center>
 <center><img src='{{ obras.imagen.url }}' width="300px" height="300px"></center>
 <br>
-<center><a class="button orange radius" href="{{obras.id}}/editarObras">Editar</a>
-<a class="button orange radius" href="{{obras.id}}/eliminarObras">Eliminar</a>
-<a class="buttonTwo orange radius" href="{{obras.id}}/registrarEmpleados">Registrar Trabajador</a>
-</center>
+<a class="buttonTwo orange" href="{{obras.id}}/editarObras">Editar Obra</a>
+<a class="buttonTwo orange" href="{{obras.id}}/eliminarObras">Eliminar Obra</a>
+<a class="buttonTwo orange" href="{{obras.id}}/registrarEmpleados">Registrar Trabajador</a>
+<a class="buttonTwo orange" href="{{obras.id}}/facturas">Gastos Generados</a>
+<a class="buttonTwo orange" href="{{obras.id}}/listaInventarios">Inventarios</a>
+<a class="buttonTwo orange" href="{{obras.id}}/listaDocArquitecto">Doc de Arquitectura</a>
+<a class="buttonTwo orange" href="{{obras.id}}/listaDocIngenieria">Doc de Ingenieria</a>
+<a class="buttonTwo orange" href="{{obras.id}}/listaDocContable">Doc de Contables</a>
+
 <br>
 
 {% endfor %}
@@ -152,7 +157,10 @@
 	<br>
 		
 	</fieldset>
-</div>
+
+	<br>
+	<br>
+		
 
 {% endblock %}
 
