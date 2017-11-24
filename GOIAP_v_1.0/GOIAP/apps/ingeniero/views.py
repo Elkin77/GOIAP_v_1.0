@@ -44,6 +44,8 @@ def cargarDocumento(request):
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoIngenieria.fk_obra=obra
 				documentoIngenieria.fk_ingeniero= perfil
+				documentoIngenieria.estado='Por Revisar'
+				documentoIngenieria.observacion=''
 
 				documentoIngenieria.save()
 				message="Ok, Documento Cargado!"
@@ -94,6 +96,8 @@ def editarDocumento(request, documento_id):
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoIngenieria.fk_obra=obra
 				documentoIngenieria.fk_arquitecto= perfil
+				documentoIngenieria.estado='Por Revisar'
+				documentoIngenieria.observacion=''
 
 				documentoIngenieria.save()
 				return redirect('gestionarDocumentosIngeniero')
@@ -106,6 +110,8 @@ def editarDocumento(request, documento_id):
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoIngenieria.fk_obra=obra
 				documentoIngenieria.fk_arquitecto= perfil
+				documentoIngenieria.estado='Por Revisar'
+				documentoIngenieria.observacion=''
 
 				documentoIngenieria.save()
 				return redirect('gestionarDocumentosIngeniero')

@@ -45,6 +45,8 @@ def cargarDocumento(request):
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoArquitectura.fk_obra=obra
 				documentoArquitectura.fk_arquitecto= perfil
+				documentoArquitectura.estado='Por Revisar'
+				documentoArquitectura.observacion=''
 
 				documentoArquitectura.save()
 				message="Ok, Documento Cargado!"
@@ -95,6 +97,8 @@ def editarDocumento(request, documento_id):
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoArquitectura.fk_obra=obra
 				documentoArquitectura.fk_arquitecto= perfil
+				documentoArquitectura.estado='Por Revisar'
+				documentoArquitectura.observacion=''
 
 				documentoArquitectura.save()
 				return redirect('gestionarDocumentos')
@@ -107,6 +111,8 @@ def editarDocumento(request, documento_id):
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoArquitectura.fk_obra=obra
 				documentoArquitectura.fk_arquitecto= perfil
+				documentoArquitectura.estado='Por Revisar'
+				documentoArquitectura.observacion=''
 
 				documentoArquitectura.save()
 				return redirect('gestionarDocumentos')
@@ -142,3 +148,50 @@ def consultarObservaciones(request):
 	else:
 		logout(request)
 		return redirect('index')
+
+@login_required
+def crearInventario(request):
+	if validarSesion(request):
+		user=User.objects.get(pk=request.session["id"])
+		perfil=Perfil.objects.get(fk_authUser=user)
+		if request.method=='POST':
+			return render(request,'arquitecto/crearInventario.html')
+		else:
+			asignaciones=Asignaciones.objects.filter(perfil=perfil)
+			obraPerfil=[]
+			context=None
+			for i in range(len(asignaciones)):
+				obra=Obra.objects.get(pk=asignaciones[i].id_obra)
+				obraPerfil.append(obra)
+			context={'listObras':obraPerfil}
+			return render(request,'arquitecto/crearInventario.html', context)
+	else:
+		logout(request)
+		return redirect('index')
+
+@login_required
+def gestionarInventario(request):
+	if validarSesion(request):
+		return render(request,'arquitecto/gestionarInventario.html')
+	else:
+		logout(request)
+		return redirect('index')
+
+
+@login_required
+def editarInventario(request, inventario_id):
+	if validarSesion(request):
+		return render(request,'arquitecto/editarInventario.html')
+	else:
+		logout(request)
+		return redirect('index')
+
+@login_required
+def eliminarInventario(request, inventario_id):
+	if validarSesion(request):
+		return render(request,'arquitecto/eliminarInventario.html')
+	else:
+		logout(request)
+		return redirect('index')
+
+

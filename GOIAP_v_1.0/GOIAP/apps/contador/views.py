@@ -44,6 +44,8 @@ def cargarDocumento(request):
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoContable.fk_obra=obra
 				documentoContable.fk_contador= perfil
+				documentoContable.estado='Por Revisar'
+				documentoContable.observacion=''
 
 				documentoContable.save()
 				message="Ok, Documento Cargado!"
@@ -94,6 +96,8 @@ def editarDocumento(request, documento_id):
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoContable.fk_obra=obra
 				documentoContable.fk_contador= perfil
+				documentoContable.estado='Por Revisar'
+				documentoContable.observacion=''
 
 				documentoContable.save()
 				return redirect('gestionarDocumentosContador')
@@ -106,6 +110,8 @@ def editarDocumento(request, documento_id):
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoContable.fk_obra=obra
 				documentoContable.fk_contador= perfil
+				documentoContable.estado='Por Revisar'
+				documentoContable.observacion=''
 
 				documentoContable.save()
 				return redirect('gestionarDocumentosContador')
