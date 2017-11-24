@@ -18,7 +18,7 @@ class Factura(models.Model):
 	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
 
 @receiver(pre_delete, sender=Factura)
-def _directorios_delete(sender, instance, using, **kwargs):
+def _directorios_deleteFactura(sender, instance, using, **kwargs):
 	file_path = settings.MEDIA_ROOT +'/'+ str(instance.imagen)
 	print(file_path)
 	if os.path.isfile(file_path):

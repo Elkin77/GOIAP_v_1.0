@@ -43,16 +43,16 @@ def cargarDocumento(request):
 				documentoIngenieria.descripcion=request.POST['descripcion']
 				obra=Obra.objects.get(pk=request.POST['obra'])
 				documentoIngenieria.fk_obra=obra
-				documentoIngenieria.fk_arquitecto= perfil
+				documentoIngenieria.fk_ingeniero= perfil
 
 				documentoIngenieria.save()
 				message="Ok, Documento Cargado!"
 				context = {'message':message}
-				return render(request,'ingeniero/IndexIngeniero.html',context)
+				return render(request,'ingeniero/cargarDocumento.html',context)
 			except KeyError:
 				datosUser=KeyError
 				context={'datosUser':datosUser}
-				return redirect('cargarDocumento')
+				return redirect('cargarDocumentoIngeniero')
 		else:
 			asignaciones=Asignaciones.objects.filter(perfil=perfil)
 			obraPerfil=[]
@@ -96,7 +96,7 @@ def editarDocumento(request, documento_id):
 				documentoIngenieria.fk_arquitecto= perfil
 
 				documentoIngenieria.save()
-				return redirect('gestionarDocumentos')
+				return redirect('gestionarDocumentosIngeniero')
 			except KeyError:
 				documentoIngenieria.nombre=request.POST['nombre']
 				documentoIngenieria.tipo_doc=request.POST['tipoDoc']
@@ -108,7 +108,7 @@ def editarDocumento(request, documento_id):
 				documentoIngenieria.fk_arquitecto= perfil
 
 				documentoIngenieria.save()
-				return redirect('gestionarDocumentos')
+				return redirect('gestionarDocumentosIngeniero')
 		else:
 			asignaciones=Asignaciones.objects.filter(perfil=perfil)
 			obraPerfil=[]
@@ -127,7 +127,7 @@ def eliminarDocumento(request, documento_id):
 	if validarSesion(request):
 		documentoIngenieria=Documento_ingenieria.objects.get(pk=documento_id)
 		documentoIngenieria.delete()
-		return redirect('gestionarDocumentos')
+		return redirect('gestionarDocumentosIngeniero')
 	else:
 		logout(request)
 		return redirect('index')

@@ -32,7 +32,7 @@ class Contenido(models.Model):
 	fk_inventario = models.ForeignKey(Inventario, null=True, blank=True, on_delete=models.CASCADE)
 
 @receiver(pre_delete, sender=Contenido)
-def _directorios_delete(sender, instance, using, **kwargs):
+def _directorios_deleteContenido(sender, instance, using, **kwargs):
 	file_path = settings.MEDIA_ROOT +'/'+ str(instance.imagen)
 	print(file_path)
 	if os.path.isfile(file_path):

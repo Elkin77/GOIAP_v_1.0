@@ -28,7 +28,7 @@ class Nomina(models.Model):
 	fk_empleado = models.ForeignKey(EmpleadoUser, null=True, blank=True, on_delete=models.CASCADE)
 
 @receiver(pre_delete, sender=Nomina)
-def _directorios_delete(sender, instance, using, **kwargs):
+def _directorios_deleteNomina(sender, instance, using, **kwargs):
 	file_path = settings.MEDIA_ROOT +'/'+ str(instance.archivo)
 	print(file_path)
 	if os.path.isfile(file_path):

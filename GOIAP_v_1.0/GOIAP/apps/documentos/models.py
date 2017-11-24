@@ -23,7 +23,7 @@ class Documento_arquitectura(models.Model):
 
 
 @receiver(pre_delete, sender=Documento_arquitectura)
-def _directorios_delete(sender, instance, using, **kwargs):
+def _directorios_deleteArquitectura(sender, instance, using, **kwargs):
 	file_path = settings.MEDIA_ROOT +'/'+ str(instance.archivo)
 	print(file_path)
 	if os.path.isfile(file_path):
@@ -43,7 +43,7 @@ class Documento_ingenieria(models.Model):
 	fk_ingeniero = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 
 @receiver(pre_delete, sender=Documento_ingenieria)
-def _directorios_delete(sender, instance, using, **kwargs):
+def _directorios_deleteIngenieria(sender, instance, using, **kwargs):
 	file_path = settings.MEDIA_ROOT +'/'+ str(instance.archivo)
 	print(file_path)
 	if os.path.isfile(file_path):
@@ -63,7 +63,7 @@ class Documento_contable(models.Model):
 	fk_contador = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 
 @receiver(pre_delete, sender=Documento_contable)
-def _directorios_delete(sender, instance, using, **kwargs):
+def _directorios_deleteContable(sender, instance, using, **kwargs):
 	file_path = settings.MEDIA_ROOT +'/'+ str(instance.archivo)
 	print(file_path)
 	if os.path.isfile(file_path):
@@ -82,7 +82,7 @@ class Reporte(models.Model):
 	fk_empleado = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
 
 @receiver(pre_delete, sender=Reporte)
-def _directorios_delete(sender, instance, using, **kwargs):
+def _directorios_deleteReporte(sender, instance, using, **kwargs):
 	file_path = settings.MEDIA_ROOT +'/'+ str(instance.imagen)
 	print(file_path)
 	if os.path.isfile(file_path):

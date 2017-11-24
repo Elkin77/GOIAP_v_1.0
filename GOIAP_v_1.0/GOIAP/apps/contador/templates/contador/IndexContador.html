@@ -10,6 +10,17 @@
 	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </nav>
 {% endblock %}
+{% block menu %}
+<ul class="menu">
+	<li><a href="#" class="linksPrincipal">Documentos Contables</a>
+		<ul>
+			<li><a href="{% url 'cargarDocumentoContador' %}">Cargar Documento</a></li>
+			<li><a href="{% url 'gestionarDocumentosContador' %}">Gestionar Documentos</a></li>
+			<li><a href="{% url 'consultarObservacionesContador' %}">Consultar Observaciones</a></li>
+		</ul>
+	</li>	
+</ul>
+{% endblock %}
 {% block contenido %}
 <div class="contenedorGeneral">
 	<fieldset>

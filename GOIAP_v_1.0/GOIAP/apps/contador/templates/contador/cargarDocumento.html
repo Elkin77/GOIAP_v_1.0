@@ -1,14 +1,14 @@
 {% extends 'user/base/Base.html' %}
 {% load staticfiles %}
-{% block title %}Ingeniero GOIAP{% endblock %}
+{% block title %}Arquitecto GOIAP{% endblock %}
 {% block extra %}
-<link rel="stylesheet" href="{% static 'css/EstilosIndexIngeniero.css' %}">
+<link rel="stylesheet" href="{% static 'css/EstilosIndexContador.css' %}">
 <link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
 <script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
 <script src="{% static 'js/ScriptsGeneral.js' %}"></script>
 <script src="{% static 'js/ScriptsCargarDocumento.js' %}"></script>
 {% endblock %}
-{% block imagen%} <a href="{% url 'indexIngeniero' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block imagen%} <a href="{% url 'indexContador' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
 <nav class="iconos">
 	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
@@ -30,16 +30,16 @@
 			<div class="left">
 				<div class="form-group">
 					<label for="nombre" class="control-label control labels">Nombre</label>
-					<input type="text" class="form-control control form" id="nombre" name="nombre" value="{{documentoIngenieria.nombre}}" required>
+					<input type="text" class="form-control control form" id="nombre" name="nombre" placeholder="Nombre Documento" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
 					<label for="tipoDoc" class="control-label control labels">Tipo Documento</label>
-					<input type="text" class="form-control control form" id="tipoDoc" name="tipoDoc" value="{{documentoIngenieria.tipo_doc}}" required>
+					<input type="text" class="form-control control form" id="tipoDoc" name="tipoDoc" placeholder="Tipo Documento" required>
 				</div>
 			</div>
-			<div class="left" id="divArchivo">
+			<div class="left">
 				<div class="form-group">
 					<label for="archivo" class="control-label control labels">Archivo</label>
 					<input type="file" class="form-control control form" id="archivo" name="archivo" required>
@@ -48,13 +48,13 @@
 			<div class="left">
 				<div class="form-group">
 					<label for="nroPag" class="control-label control labels">Numero Paginas</label>
-					<input type="number" class="form-control control form" id="nroPag" name="nroPag" value="{{documentoIngenieria.nro_paginas}}" required>
+					<input type="number" class="form-control control form" id="nroPag" name="nroPag" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
 					<label for="descripcion" class="control-label control labels">Descripcion</label>
-					<textarea class="form-control control form" id="descripcion" name="descripcion" required>{{documentoIngenieria.descripcion}}</textarea>
+					<textarea class="form-control control form" id="descripcion" name="descripcion"></textarea>
 				</div>
 			</div>
 			{% if listObras %}
@@ -71,9 +71,7 @@
 			<div class="form-group">
 				<div class="col-lg-10 col-lg-offset-2">
 					<input type="submit" class="btn btn-default boton" name="guardar" value="Guardar">
-					<a href="#" class="btn btn-default boton" id="cargarArchivo">Cargar Archivo</a>
 				</div>
-
 			</div>
 			{% else %}
 			<div class="left">

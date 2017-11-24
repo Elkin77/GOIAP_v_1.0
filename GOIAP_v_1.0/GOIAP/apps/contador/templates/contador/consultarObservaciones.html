@@ -1,10 +1,10 @@
 {% extends 'user/base/Base.html' %}
 {% load staticfiles %}
-{% block title %}Ingeniero GOIAP{% endblock %}
+{% block title %}Arquitecto GOIAP{% endblock %}
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosBaseTablas.css' %}">
 {% endblock %}
-{% block imagen%} <a href="{% url 'indexIngeniero' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block imagen%} <a href="{% url 'indexContador' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
 <nav class="iconos">
 	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
@@ -47,17 +47,15 @@
 </table>
 
 <br>
-<center><legend>Lista de Documentos Cargados</legend></center>
+<center><legend>Observaciones de Documentos</legend></center>
 	<table>
 		<thead>
 			<tr>
 				<td>ID</td>
 				<td>NOMBRE</td>
-				<td>FECHA CARGA</td>
-				<td>DESCRIPCION</td>
+				<td>ESTADO</td>
+				<td>OBSERVACIONES</td>
 				<td>OBRA</td>
-				<td>EDITAR</td>
-				<td>ELIMINAR</td>
 				
 			</tr>
 
@@ -68,12 +66,9 @@
 			<tr>
 				<td>{{documentos.id}}</td>
 				<td><a href="{{documentos.archivo.url}}">{{documentos.nombre}}</a></td>
-				<td>{{documentos.fecha_carga}}</td>
-				<td>{{documentos.descripcion}}</td>
+				<td>{{documentos.estado}}</td>
+				<td>{{documentos.observaciones}}</td>
 				<td>{{documentos.fk_obra}}</td>
-				<td><a class="button orange radius" href="{{documentos.id}}/editarDocumento">Editar</a></td>	
-				<td><a class="button orange radius" href="{{documentos.id}}/eliminarDocumento">Eliminar</a></td>	
-
 			</tr>
 			{% endfor %}
 			{% else %}
