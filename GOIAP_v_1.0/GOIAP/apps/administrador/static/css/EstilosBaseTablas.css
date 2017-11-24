@@ -1,0 +1,102 @@
+table{
+	background-color: white;
+	text-align: center;
+	border-collapse: collapse;
+	width: 100%;
+
+}
+
+th, td{
+
+	padding: 10px;
+
+}
+thead{
+	background-color: #252932;
+	border-bottom: solid 5px #B08A04;
+	color: white;
+}
+tr:nth-child(even){
+	background-color: #ddd;
+
+}
+tr:hover td{
+	background-color: #252932;
+	color: white;
+}
+
+.button {
+	background: #7f8c8d;
+	color: #fff;
+	display:inline-block;
+	font-size: 1.0em;
+	margin:0px;
+	padding: 4px 0px;
+	text-align:center;
+	width: 70px;
+	text-decoration: none;
+	box-shadow: 0px 3px 0px #373c3c;
+}
+
+.buttonTwo {
+	background: #7f8c8d;
+	color: #fff;
+	display:inline-block;
+	font-size: 1.0em;
+	margin:0px;
+	padding: 4px 0px;
+	text-align:center;
+	width: 150px;
+	text-decoration: none;
+	box-shadow: 0px 3px 0px #373c3c;
+}
+
+.button span{
+	margin-right: 5px;
+}
+
+.buttonTwo span{
+	margin-right: 5px;
+}
+
+.button.orange{
+	background: #B08A04;
+	box-shadow: 0px 3px 0px #252932;
+	text-decoration: none;
+}
+
+.buttonTwo.orange{
+	background: #B08A04;
+	box-shadow: 0px 3px 0px #252932;
+	text-decoration: none;
+}
+
+.button.radius{
+		border-radius: 20px;
+}
+
+.buttonTwo.radius{
+		border-radius: 20px;
+}
+
+.button:hover{
+	box-shadow: 0px 0px 0px;
+	padding-top: 7px;
+}
+
+
+.buttonTwo:hover{
+	box-shadow: 0px 0px 0px;
+	padding-top: 7px;
+}
+
+.alert.alert-dismissible.alert-danger.alerta{
+	background: #B08A04;
+	color: #fff;
+	position: absolute;
+	left: 30%;
+	top: 20%;
+}
+.alert.alert-dismissible.alert-danger.alerta .alert-link{
+	color: blue;
+}

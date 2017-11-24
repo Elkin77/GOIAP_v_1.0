@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from apps.user.models import Perfil, Asignaciones
 from apps.obra.models import Obra
-from apps.documentos.models import Reporte, Documento_arquitectura, Documento_ingenieria, Documento_contable
+from apps.documentos.models import Reporte, Documento_arquitectura, Documento_ingenieria, Documento_contable, Documento_admin
 from apps.empleado.models import EmpleadoUser
 from apps.inventario.models import Inventario, Contenido
 from apps.facturas.models import Factura
@@ -424,6 +424,7 @@ def editarDocArquitectura_view(request, doc_id):
 
             obser = request.POST['observacion']
             documento.observacion = obser
+            documento.estado='Revisado'
             documento.save()
 
             context={'message':message}
@@ -446,6 +447,7 @@ def editarDocIngenieria_view(request, doc_id):
 
             obser = request.POST['observacion']
             documento.observacion = obser
+            documento.estado='Revisado'
             documento.save()
 
             context={'message':message}
@@ -468,6 +470,7 @@ def editarDocContable_view(request, doc_id):
 
             obser = request.POST['observacion']
             documento.observacion = obser
+            documento.estado='Revisado'
             documento.save()
 
             context={'message':message}
@@ -542,4 +545,98 @@ def asignarObras_view(request, user_id):
 
     else:
         logout(request)
-        return redirect('index')        
+        return redirect('index')
+
+@login_required
+def subirDocumento(request):
+    if validarSesion(request):
+        user=User.objects.get(pk=request.session["id"])
+        perfil=Perfil.objects.get(fk_authUser=user)
+        if request.method == 'POST':
+            documentoAdmin=Documento_admin()
+            try:
+                documentoAdmin.nombre=request.POST['nombre']
+                documentoAdmin.tipo_doc=request.POST['tipoDoc']
+                documentoAdmin.fecha_carga=datetime.now()
+                documentoAdmin.archivo=request.FILES['archivo']
+                documentoAdmin.nro_paginas=request.POST['nroPag']
+                documentoAdmin.descripcion=request.POST['descripcion']
+                obra=Obra.objects.get(pk=request.POST['obra'])
+                documentoAdmin.fk_obra=obra
+                documentoAdmin.fk_admin=perfil
+
+                documentoAdmin.save()
+                message="Ok, Documento Cargado!"
+                context = {'message':message}
+                return render(request,'administrador/subirDocumento.html',context)
+            except KeyError:
+                datosUser=KeyError
+                context={'datosUser':datosUser}
+                return redirect('cargarDocumentoAdmin')
+        else:
+            obras=Obra.objects.all()
+            context={'listObras':obras}
+            return render(request,'administrador/subirDocumento.html',context)
+    else:
+        logout(request)
+        return redirect('index')
+
+@login_required
+def gestionarDocumentos(request):
+    if validarSesion(request):
+        documentoAdmin=Documento_admin.objects.filter(fk_admin=request.session['id'])
+        context={'listDocumentos':documentoAdmin}
+        return render(request,'administrador/gestionarDocumentos.html',context)
+    else:
+        logout(request)
+        return redirect('index')
+    
+@login_required
+def editarDocumento(request, documento_id):
+    if validarSesion(request):
+        user=User.objects.get(pk=request.session["id"])
+        perfil=Perfil.objects.get(fk_authUser=user)
+        documentoAdmin=Documento_admin.objects.get(pk=documento_id)
+        if request.method == 'POST':
+            try:
+                documentoAdmin.nombre=request.POST['nombre']
+                documentoAdmin.tipo_doc=request.POST['tipoDoc']
+                documentoAdmin.fecha_carga=datetime.now()
+                documentoAdmin.archivo=request.FILES['archivo']
+                documentoAdmin.nro_paginas=request.POST['nroPag']
+                documentoAdmin.descripcion=request.POST['descripcion']
+                obra=Obra.objects.get(pk=request.POST['obra'])
+                documentoAdmin.fk_obra=obra
+                documentoAdmin.fk_admin= perfil
+
+                documentoAdmin.save()
+                return redirect('gestionarDocumentosAdmin')
+            except KeyError:
+                documentoAdmin.nombre=request.POST['nombre']
+                documentoAdmin.tipo_doc=request.POST['tipoDoc']
+                documentoAdmin.fecha_carga=datetime.now()
+                documentoAdmin.nro_paginas=request.POST['nroPag']
+                documentoAdmin.descripcion=request.POST['descripcion']
+                obra=Obra.objects.get(pk=request.POST['obra'])
+                documentoAdmin.fk_obra=obra
+                documentoAdmin.fk_arquitecto= perfil
+
+                documentoAdmin.save()
+                return redirect('gestionarDocumentosAdmin')
+        else:
+            obras=Obra.objects.all()
+            context={'documentoAdmin':documentoAdmin,'listObras':obras} 
+            return render(request,'administrador/editarDocumento.html', context)
+    else:
+        logout(request)
+        return redirect('index')
+
+@login_required
+def eliminarDocumento(request, documento_id):
+    if validarSesion(request):
+        documentoAdmin=Documento_admin.objects.get(pk=documento_id)
+        documentoAdmin.delete()
+        return redirect('gestionarDocumentosAdmin')
+    else:
+        logout(request)
+        return redirect('index')

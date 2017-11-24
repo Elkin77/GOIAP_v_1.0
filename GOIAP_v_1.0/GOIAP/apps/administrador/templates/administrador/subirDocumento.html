@@ -1,0 +1,95 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP{% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+<link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
+<script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
+<script src="{% static 'js/ScriptsGeneral.js' %}"></script>
+<script src="{% static 'js/ScriptsCargarDocumento.js' %}"></script>
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+{% if message %}
+		<div class="alert alert-dismissible alert-success alerta" id="advertencia">
+			<button type="button" class="close" id="cerrar" data-dismiss="alert">&times;</button>
+			<strong>{{message}}</strong>
+		</div>
+{% endif %}
+<div class="contenedorAgregar">
+	<fieldset>
+		<legend>Cargar Documento</legend>
+		<form action="" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p}}
+			<div class="left">
+				<div class="form-group">
+					<label for="nombre" class="control-label control labels">Nombre</label>
+					<input type="text" class="form-control control form" id="nombre" name="nombre" placeholder="Nombre Documento" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="tipoDoc" class="control-label control labels">Tipo Documento</label>
+					<input type="text" class="form-control control form" id="tipoDoc" name="tipoDoc" placeholder="Tipo Documento" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="archivo" class="control-label control labels">Archivo</label>
+					<input type="file" class="form-control control form" id="archivo" name="archivo" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="nroPag" class="control-label control labels">Numero Paginas</label>
+					<input type="number" class="form-control control form" id="nroPag" name="nroPag" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="descripcion" class="control-label control labels">Descripcion</label>
+					<textarea class="form-control control form" id="descripcion" name="descripcion"></textarea>
+				</div>
+			</div>
+			{% if listObras %}
+			<div class="left">
+				<div class="form-group">
+					<label for="obra" class="control-label control labels">Obra</label>
+					<select class="form-control control form" id="obra" name="obra">
+						{% for obras in listObras %}
+						<option value="{{obras.pk}}">{{obras.nombre}}</option>
+						{% endfor %}
+					</select><br>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-10 col-lg-offset-2">
+					<input type="submit" class="btn btn-default boton" name="guardar" value="Guardar">
+				</div>
+			</div>
+			{% else %}
+			<div class="left">
+				<div class="form-group">
+					<label for="obra" class="control-label control labels">Obra</label>
+					<select class="form-control control form" id="obra" name="obra" disabled>
+						<option>No hay Obras Registradas en el Sistema</option>
+					</select><br>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-10 col-lg-offset-2">
+					<input type="submit" class="btn btn-default boton" name="guardar" value="Guardar" disabled>
+				</div>
+			</div>
+			{% endif %}
+		</form>
+	</fieldset>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

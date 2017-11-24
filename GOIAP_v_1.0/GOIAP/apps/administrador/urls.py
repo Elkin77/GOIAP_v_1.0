@@ -29,5 +29,9 @@ urlpatterns = [
     url(r'(?P<doc_id>[0-9]+)/editarDocIngenieria$',views.editarDocIngenieria_view, name='editarDocIngenieria'),
     url(r'(?P<doc_id>[0-9]+)/editarDocContable$',views.editarDocContable_view, name='editarDocContable'),
     url(r'(?P<doc_id>[0-9]+)/contenidoInventario$',views.listaContenidoInventario_view, name='contenidoInventario'),
+    url(r'subirDocumento/', views.subirDocumento, name="subirDocumentoAdmin"),
+    url(r'(?P<documento_id>[0-9]+)/eliminarDocumento$',views.eliminarDocumento,name='eliminarDocumentoAdmin'),
+    url(r'(?P<documento_id>[0-9]+)/editarDocumento$',views.editarDocumento,name='editarDocumentoAdmin'),
+    url(r'gestionarDocumentos/', views.gestionarDocumentos, name="gestionarDocumentosAdmin"),
 ]
 

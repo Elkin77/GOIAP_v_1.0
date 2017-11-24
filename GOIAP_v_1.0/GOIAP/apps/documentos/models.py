@@ -87,3 +87,20 @@ def _directorios_deleteReporte(sender, instance, using, **kwargs):
 	print(file_path)
 	if os.path.isfile(file_path):
 		os.remove(file_path)
+
+class Documento_admin(models.Model):
+	nombre = models.CharField(max_length=50)
+	tipo_doc = models.CharField(max_length=50)
+	fecha_carga = models.DateField()
+	archivo = models.FileField(upload_to='documentos/DocumentoAdministrador/')
+	nro_paginas = models.IntegerField()
+	descripcion = models.CharField(max_length=300)
+	fk_obra = models.ForeignKey(Obra, null=True, blank=True, on_delete=models.CASCADE)
+	fk_admin = models.ForeignKey(Perfil, null=True, blank=True, on_delete=models.CASCADE)
+
+@receiver(pre_delete, sender=Documento_admin)
+def _directorios_deleteAdmin(sender, instance, using, **kwargs):
+	file_path = settings.MEDIA_ROOT +'/'+ str(instance.archivo)
+	print(file_path)
+	if os.path.isfile(file_path):
+		os.remove(file_path)
