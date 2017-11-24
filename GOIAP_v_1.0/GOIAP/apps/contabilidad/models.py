@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import pre_delete, post_delete
 from django.dispatch import receiver
 from django.conf import settings
+import os
 from apps.empleado.models import EmpleadoUser
 
 # Create your models here.

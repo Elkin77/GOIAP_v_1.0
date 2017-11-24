@@ -9,5 +9,9 @@ urlpatterns = [
     url(r'(?P<documento_id>[0-9]+)/editarDocumento$',views.editarDocumento,name='editarDocumentoContador'),
     url(r'gestionarDocumentos/', views.gestionarDocumentos, name="gestionarDocumentosContador"),
     url(r'consultarObservaciones/', views.consultarObservaciones, name="consultarObservacionesContador"),
+    url(r'cargarFactura/', views.cargarFactura, name="cargarFacturaContador"),
+    url(r'(?P<factura_id>[0-9]+)/eliminarFactura$',views.eliminarFactura,name='eliminarFacturaContador'),
+    url(r'(?P<factura_id>[0-9]+)/editarFactura$',views.editarFactura,name='editarFacturaContador'),
+    url(r'gestionarFacturas/', views.gestionarFacturas, name="gestionarFacturasContador"),
     url(r'logout/$',user_views.logout_view, name='logout'),
 ]

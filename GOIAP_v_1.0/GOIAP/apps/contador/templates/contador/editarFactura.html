@@ -2,11 +2,11 @@
 {% load staticfiles %}
 {% block title %}Contador GOIAP{% endblock %}
 {% block extra %}
-<link rel="stylesheet" href="{% static 'css/EstilosIndexArquitecto.css' %}">
+<link rel="stylesheet" href="{% static 'css/EstilosIndexContador.css' %}">
 <link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
 <script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
 <script src="{% static 'js/ScriptsGeneral.js' %}"></script>
-<script src="{% static 'js/ScriptsCargarDocumento.js' %}"></script>
+<script src="{% static 'js/ScriptsCargarImagen.js' %}"></script>
 {% endblock %}
 {% block imagen%} <a href="{% url 'indexContador' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
@@ -23,40 +23,53 @@
 {% endif %}
 <div class="contenedorAgregar">
 	<fieldset>
-		<legend>Cargar Documento</legend>
+		<legend>Cargar Factura</legend>
 		<form action="" method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
 			{{ form.as_p}}
 			<div class="left">
 				<div class="form-group">
-					<label for="nombre" class="control-label control labels">Nombre</label>
-					<input type="text" class="form-control control form" id="nombre" name="nombre" value="{{documentoContable.nombre}}" required>
+					<label for="empresa" class="control-label control labels">Empresa</label>
+					<input type="text" class="form-control control form" id="empresa" name="empresa" value="{{factura.empresa}}" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
-					<label for="tipoDoc" class="control-label control labels">Tipo Documento</label>
-					<input type="text" class="form-control control form" id="tipoDoc" name="tipoDoc" value="{{documentoContable.tipo_doc}}" required>
-				</div>
-			</div>
-			<div class="left" id="divArchivo">
-				<div class="form-group">
-					<label for="archivo" class="control-label control labels">Archivo</label>
-					<input type="file" class="form-control control form" id="archivo" name="archivo" required>
+					<label for="nitEmpresa" class="control-label control labels">NIT Empresa</label>
+					<input type="text" class="form-control control form" id="nitEmpresa" name="nitEmpresa" value="{{factura.nit_empresa}}" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
-					<label for="nroPag" class="control-label control labels">Numero Paginas</label>
-					<input type="number" class="form-control control form" id="nroPag" name="nroPag" value="{{documentoContable.nro_paginas}}" required>
+					<label for="codigo" class="control-label control labels">Codigo Factura</label>
+					<input type="text" class="form-control control form" id="codigo" name="codigo" value="{{factura.codigo_factura}}" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="valor" class="control-label control labels">Valor</label>
+					<input type="text" class="form-control control form" id="valor" name="valor" value="{{factura.valor}}" required>
+				</div>
+			</div>
+			<div class="left">
+				<div class="form-group">
+					<label for="fecha" class="control-label control labels">Fecha</label>
+					<input type="date" class="form-control control form" id="fecha" name="fecha" required>
 				</div>
 			</div>
 			<div class="left">
 				<div class="form-group">
 					<label for="descripcion" class="control-label control labels">Descripcion</label>
-					<textarea class="form-control control form" id="descripcion" name="descripcion" required>{{documentoContable.descripcion}}</textarea>
+					<textarea class="form-control control form" id="descripcion" name="descripcion" required>{{factura.descripcion}}</textarea>
 				</div>
 			</div>
+			<div class="left" id="divImagen">
+				<div class="form-group">
+					<label for="imagen" class="control-label control labels">Imagen</label>
+					<input type="file" class="form-control control form" id="imagen" name="imagen" required>
+				</div>
+			</div>
+
 			{% if listObras %}
 			<div class="left">
 				<div class="form-group">
@@ -71,9 +84,8 @@
 			<div class="form-group">
 				<div class="col-lg-10 col-lg-offset-2">
 					<input type="submit" class="btn btn-default boton" name="guardar" value="Guardar">
-					<a href="#" class="btn btn-default boton" id="cargarArchivo">Cargar Archivo</a>
+					<a href="#" class="btn btn-default boton" id="cargarImagen">Cargar Imagen</a>
 				</div>
-
 			</div>
 			{% else %}
 			<div class="left">

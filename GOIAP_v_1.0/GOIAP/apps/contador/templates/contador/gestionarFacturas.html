@@ -1,0 +1,69 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Administrador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexContador.css' %}">
+<link rel="stylesheet" href="{% static 'css/EstilosBaseTablas.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexContador' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+<center><legend>Lista de Facturas</legend></center>
+	<table>
+		<thead>
+			<tr>
+				<td>IMAGEN</td>
+				<td>EMPRESA</td>
+				<td>NIT EMPRESA</td>
+				<td>CODIGO FACTURA</td>
+				<td>VALOR</td>
+				<td>FECHA</td>
+				<td>DESCRIPCION</td>
+				<td>OBRA</td>
+				<td>EDITAR</td>
+				<td>ELIMINAR</td>
+				
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listFacturas %}
+			{% for facturas in listFacturas %}
+			<tr>
+				<td><img src='{{ facturas.imagen.url }}' width="100px" height="100px" ></td>
+				<td>{{facturas.empresa}}</td>
+				<td>{{facturas.nit_empresa}}</td>
+				<td>{{facturas.codigo_factura}}</td>
+				<td>{{facturas.valor}}</td>
+				<td>{{facturas.fecha}}</td>
+				<td>{{facturas.descripcion}}</td>
+				<td>{{facturas.fk_obra}}</td>
+				<td><a class="button orange radius" href="{{facturas.id}}/editarFactura">editar</a></td>
+				<td><a class="button orange radius" href="{{facturas.id}}/eliminarFactura">eliminar</a></td>	
+					
+
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>
+
+		
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
