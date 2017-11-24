@@ -241,6 +241,16 @@ def eliminarAsignacion_view(request, user_id):
         return redirect('index')
 
 
+@login_required
+def eliminarReporte_view(request, reporte_id):
+    if validarSesion(request):
+        reportes=Reporte.objects.get(pk=reporte_id)
+        reportes.delete()
+        return redirect("listaObras")
+    else:
+        logout(request)
+        return redirect('index')
+
 
 @login_required
 def editarUsuario_view(request, usuario_id):

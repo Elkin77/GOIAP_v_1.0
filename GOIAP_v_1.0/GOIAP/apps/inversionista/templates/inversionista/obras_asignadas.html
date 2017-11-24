@@ -1,0 +1,61 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Inversionista GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexInversionista' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+<center><legend>Lista de Obras</legend></center>
+	<table>
+		<thead>
+			<tr>
+				<td>ID OBRA</td>
+				<td>IMAGEN</td>
+				<td>NOMBRE OBRA</td>
+				<td>FECHA DE ASIGNACIÓN</td>
+				<td>DESCRIPCIÓN</td>
+				<td>VER INFO</td>
+				
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listObras %}
+			{% for obras in listObras %}
+			<tr>
+				<td>{{obras.id_obra}}</td>
+				<td><img src='{{ obras.imagen.url }}' width="100px" height="100px" ></td>
+				<td>{{obras.nombreObra}}</td>
+				<td>{{obras.fecha_solicitud}}</td>
+				<td>{{obras.descripcion}}</td>
+				<td><a class="button orange radius" href="{{obras.id_obra}}/informacionObra">View</a></td>	
+					
+
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>No hay registros!</h1>
+			<h5>Pongase en contacto con un Administrador!</h5>
+			{% endif %}
+		</tbody>
+
+		
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

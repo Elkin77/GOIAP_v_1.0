@@ -19,6 +19,6 @@ urlpatterns = [
     url(r'(?P<obra_id>[0-9]+)/registrarEmpleados$',views.registrarEmpleados_view,name='registrarEmpleados'),
     url(r'(?P<user_id>[0-9]+)/asignarObras$',views.asignarObras_view,name='asignarObras'),
     url(r'(?P<user_id>[0-9]+)/eliminarAsignacion$',views.eliminarAsignacion_view,name='eliminarAsignacion'),
-
+    url(r'(?P<reporte_id>[0-9]+)/eliminarReporte$',views.eliminarReporte_view, name='eliminarReporte'),
 ]
 
