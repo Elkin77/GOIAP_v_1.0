@@ -1,0 +1,60 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Contador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexContador' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+<center><legend>Lista de Obras</legend></center>
+	<table>
+		<thead>
+			<tr>
+				<td>IMAGEN</td>
+				<td>NOMBRE</td>
+				<td>TIPO</td>
+				<td>ESTADO</td>
+				<td># APARTAMENTOS</td>
+				<td>VER INFO</td>
+				
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listObras %}
+			{% for obras in listObras %}
+			<tr>
+				<td><img src='{{ obras.imagen.url }}' width="100px" height="100px" ></td>
+				<td>{{obras.nombre}}</td>
+				<td>{{obras.tipo}}</td>
+				<td>{{obras.estado}}</td>
+				<td>{{obras.nroApartamentos}}</td>
+				<td><a class="buttonTwo orange radius" href="{{obras.id}}/listaTrabajadoresNomina">Generar Nomina</a></td>	
+					
+
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>no hay registros</h1>
+			{% endif %}
+		</tbody>
+
+		
+
+	</table>		
+
+		
+	</fieldset>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

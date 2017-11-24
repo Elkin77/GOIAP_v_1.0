@@ -1,0 +1,101 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Contador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
+<script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
+  <!-- <script src="{% static 'js/jQuery.js' %}"></script> -->
+<script src="{% static 'js/ScriptsGeneral.js' %}"></script>
+<script src="{% static 'js/ScriptsIndex.js' %}"></script>
+<script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexContador' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+{% if message %}
+		<div class="alert alert-dismissible alert-success alerta" id="advertencia">
+			<button type="button" class="close" id="cerrar" data-dismiss="alert">&times;</button>
+			<strong>Ok, Registro Exitoso!</strong> 
+		</div>
+{% endif %}
+<center><h3>NOMINA</h3></center>
+<div class="contenedorAgregar">
+	<fieldset>
+		<br>
+		<form action="" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p}}
+			{% if datosTrabajador %}
+			<div class="left">
+				<div class="form-group">
+					<label for="salario" class="control-label control labels">Salario</label>
+					<input type="text" class="form-control control form" id="salario" name="salario" value={{datosTrabajador.salario}} required>
+				</div>
+			</div>
+			{% endif %}
+
+			<div class="left">
+				<div class="form-group">
+					<label for="dias_laborados" class="control-label control labels">Dias Laborados</label>
+					<input type="number" class="form-control control form" id="nombre" name="dias_laborados" value="0" min="0" max="15" required>
+				</div>
+			</div>
+
+			<legend>Devengado</legend>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="nrohorasdiurnas" class="control-label control labels"># Horas Diurnas</label>
+					<input type="number" class="form-control control form" id="nrohorasdiurnas" name="nrohorasdiurnas" value="0" min="0" max="48" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="nrohorasnocturnas" class="control-label control labels"># Horas Nocturnas</label>
+					<input type="number" class="form-control control form" id="nrohorasnocturnas" name="nrohorasnocturnas" value="0" min="0" max="48" required>
+				</div>
+			</div>
+
+
+			<div class="left">
+				<div class="form-group">
+					<label for="nrohorasdominicales" class="control-label control labels"># Horas Dominicales</label>
+					<input type="number" class="form-control control form" id="nrohorasdominicales" name="nrohorasdominicales" value="0" min="0" max="48" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="tipo" class="control-label control labels">Bonificaciones</label>
+					<input type="text" class="form-control control form" id="bonificaciones" name="bonificaciones" value="0" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="auxalimentacion" class="control-label control labels">Aux Alimentación</label>
+					<input type="text" class="form-control control form" id="auxalimentacion" name="auxalimentacion" value="0" required>
+				</div>
+			</div>
+
+			<div class="left">
+			<div class="form-group">
+				<div class="col-lg-10 col-lg-offset-2">
+					<input type="submit" class="btn btn-default boton" name="guardar" value="Generar Nomina">
+				</div>
+			</div>
+		</div>
+		</form>
+	</fieldset>
+	<br>
+	<br>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

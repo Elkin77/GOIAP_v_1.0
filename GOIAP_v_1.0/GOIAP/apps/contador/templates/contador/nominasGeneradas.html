@@ -1,0 +1,77 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Contador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosIndexAdmin.css' %}">
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexContador' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+{% if trabajador %}
+
+<center><h1>{{trabajador.nombre}}</h1></center>
+
+<br>
+<br>
+<br>
+
+{% else %}
+<h1>no hay registros</h1>
+{% endif %}
+	<legend>Nominas Generadas</legend>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>FECHA DE PAGO</td>
+				<td>SALARIO</td>
+				<td>DIAS LABORADOS</td>
+				<td>BASICO</td>
+				<td>TOTAL DEVENGADO</td>
+				<td>TOTAL DEDUCCIONES</td>
+				<td>NETO A PAGAR</td>
+				<td>INFO</td>
+				<td>ELIMINAR</td>
+				
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			{% if listNominas %}
+			{% for nomina in listNominas %}
+			<tr>
+				<td>{{nomina.id}}</td>
+				<td>{{nomina.fecha}}</td>
+				<td>{{trabajador.salario}}</td>
+				<td>{{nomina.dias_laborados}}</td>
+				<td>{{nomina.basico}}</td>
+				<td>{{nomina.total_devengado}}</td>
+				<td>{{nomina.total_deducciones}}</td>
+				<td>{{nomina.neto_pagar}}</td>
+				<td><a class="button orange radius" href="{{nomina.id}}/informacionNomina">View</a></td>
+				<td><a class="button orange radius" href="{{nomina.id}}/eliminarNomina">Eliminar</a></td>
+
+			</tr>
+			{% endfor %}
+		{% else %}
+		<h1>no hay registros</h1>
+		{% endif %}	
+		</tbody>
+	</table>
+		
+	</fieldset>
+
+	<br>
+	<br>
+		
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

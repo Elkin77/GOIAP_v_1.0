@@ -1,0 +1,187 @@
+{% extends 'user/base/Base.html' %}
+{% load staticfiles %}
+{% block title %}Contador GOIAP {% endblock %}
+{% block extra %}
+<link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
+<script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
+  <!-- <script src="{% static 'js/jQuery.js' %}"></script> -->
+<script src="{% static 'js/ScriptsGeneral.js' %}"></script>
+<script src="{% static 'js/ScriptsIndex.js' %}"></script>
+<script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
+{% endblock %}
+{% block imagen%} <a href="{% url 'indexContador' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
+{% block iconos %}
+<nav class="iconos">
+	<a href="#" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</nav>
+{% endblock %}
+{% block contenido %}
+
+{% if message %}
+		<div class="alert alert-dismissible alert-success alerta" id="advertencia">
+			<button type="button" class="close" id="cerrar" data-dismiss="alert">&times;</button>
+			<strong>Ok, Registro Exitoso!</strong> 
+		</div>
+{% endif %}
+<center><h3>INFORMACIÓN DE NOMINA</h3></center>
+<div class="contenedorAgregar">
+	<fieldset>
+		<br>
+		{% if dataNomina %}
+		<form action="" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p}}
+			{% if datosTrabajador %}
+			<div class="left">
+				<div class="form-group">
+					<label for="salario" class="control-label control labels">Salario</label>
+					<input type="text" class="form-control control form" id="salario" name="salario" value={{datosTrabajador.salario}} disabled="true" required>
+				</div>
+			</div>
+			{% endif %}
+
+
+			<div class="left">
+				<div class="form-group">
+					<label for="dias_laborados" class="control-label control labels">Dias Laborados</label>
+					<input type="number" class="form-control control form" id="nombre" name="dias_laborados" value="{{dataNomina.dias_laborados}}" disabled="true" min="0" max="15" required>
+				</div>
+			</div>
+
+			<legend>Devengado</legend>
+			<div class="left">
+				<div class="form-group">
+					<label for="basico" class="control-label control labels">Basico</label>
+					<input type="text" class="form-control control form" id="basico" name="basico" value="{{dataNomina.basico}}" disabled="true" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="bonificaciones" class="control-label control labels">Bonificaciones</label>
+					<input type="text" class="form-control control form" id="bonificaciones" name="bonificaciones" value="{{dataNomina.bonificaciones}}" disabled="true" required>
+				</div>
+			</div>
+
+
+			<div class="left">
+				<div class="form-group">
+					<label for="nrohorasdiurnas" class="control-label control labels"># Horas Diurnas</label>
+					<input type="number" class="form-control control form" id="nrohorasdiurnas" name="nrohorasdiurnas" value="{{dataNomina.nro_horas_diurnas}}" disabled="true" min="0" max="48" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="valor_diurnas" class="control-label control labels">Valor Horas Diurnas</label>
+					<input type="text" class="form-control control form" id="valor_diurnas" name="valor_diurnas" value={{dataNomina.valor_horas_diurnas}} disabled="true" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="nrohorasnocturnas" class="control-label control labels"># Horas Nocturnas</label>
+					<input type="number" class="form-control control form" id="nrohorasnocturnas" name="nrohorasnocturnas" value="{{dataNomina.nro_horas_nocturas}}" disabled="true" min="0" max="48" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="valor_nocturnas" class="control-label control labels">Valor Horas Nocturnas</label>
+					<input type="text" class="form-control control form" id="valor_nocturnas" name="valor_nocturnas" value={{dataNomina.valor_horas_nocturnas}} disabled="true" required>
+				</div>
+			</div>
+
+
+			<div class="left">
+				<div class="form-group">
+					<label for="nrohorasdominicales" class="control-label control labels"># Horas Dominicales</label>
+					<input type="number" class="form-control control form" id="nrohorasdominicales" name="nrohorasdominicales" value="{{dataNomina.nro_horas_dominicales}}" disabled="true" min="0" max="48" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="valor_dominicales" class="control-label control labels">Valor Horas Dominicales</label>
+					<input type="text" class="form-control control form" id="valor_dominicales" name="valor_dominicales" value={{dataNomina.valor_horas_dominicales}} disabled="true" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="auxtransporte" class="control-label control labels">Auxilio de Transporte</label>
+					<input type="text" class="form-control control form" id="auxtransporte" name="auxtransporte" value="{{dataNomina.aux_transporte}}" disabled="true" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="auxalimentacion" class="control-label control labels">Aux Alimentación</label>
+					<input type="text" class="form-control control form" id="auxalimentacion" name="auxalimentacion" value="{{dataNomina.aux_alimentacion}}" disabled="true" required>
+				</div>
+			</div>
+
+			<legend>Deducciones</legend>
+			<div class="left">
+				<div class="form-group">
+					<label for="salud" class="control-label control labels">Aporte Salud</label>
+					<input type="text" class="form-control control form" id="salud" name="salud" value="{{dataNomina.aporte_salud}}" disabled="true" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="pension" class="control-label control labels">Aporte Pension</label>
+					<input type="text" class="form-control control form" id="pension" name="pension" value="{{dataNomina.aporte_pension}}" disabled="true" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="retefuente" class="control-label control labels">Retención Fuente</label>
+					<input type="text" class="form-control control form" id="retefuente" name="retefuente" value="{{dataNomina.retencion_fuente}}" disabled="true" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="deducciones" class="control-label control labels">Total Deducciones</label>
+					<input type="text" class="form-control control form" id="deducciones" name="deducciones" value="{{dataNomina.total_deducciones}}" disabled="true" required>
+				</div>
+			</div>
+
+			<legend>Total</legend>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="devengado" class="control-label control labels">Total Devengado</label>
+					<input type="text" class="form-control control form" id="devengado" name="devengado" value="{{dataNomina.total_devengado}}" disabled="true" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="neto" class="control-label control labels">Neto Total</label>
+					<input type="text" class="form-control control form" id="neto" name="neto" value="{{dataNomina.neto_pagar}}" disabled="true" required>
+				</div>
+			</div>
+
+			<div class="left">
+				<div class="form-group">
+					<label for="fecha" class="control-label control labels">Fecha Generado</label>
+					<input type="text" class="form-control control form" id="fecha" name="fecha" value="{{dataNomina.fecha}}" disabled="true" required>
+				</div>
+			</div>
+
+		</form>
+		{% else %}
+		<h3> no hay registros</h3>
+		{% endif %}
+
+	</fieldset>
+	<br>
+	<br>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

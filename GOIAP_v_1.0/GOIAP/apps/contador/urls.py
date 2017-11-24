@@ -14,4 +14,10 @@ urlpatterns = [
     url(r'(?P<factura_id>[0-9]+)/editarFactura$',views.editarFactura,name='editarFacturaContador'),
     url(r'gestionarFacturas/', views.gestionarFacturas, name="gestionarFacturasContador"),
     url(r'logout/$',user_views.logout_view, name='logout'),
+    url(r'^listaObrasNomina/$',views.listaObrasNomina_view, name='listaObrasNomina'),
+    url(r'(?P<obra_id>[0-9]+)/listaTrabajadoresNomina$',views.listaTrabajadoresNomina_view,name='listaTrabajadoresNomina'),
+    url(r'(?P<trabajador_id>[0-9]+)/formularioNomina$',views.formularioNomina_view,name='formularioNomina'),
+    url(r'(?P<trabajador_id>[0-9]+)/nominasGeneradas$',views.nominasGeneradas_view,name='nominasGeneradas'),
+    url(r'(?P<nomina_id>[0-9]+)/informacionNomina$',views.informacionNomina_view,name='informacionNomina'),
+    url(r'(?P<nomina_id>[0-9]+)/eliminarNomina$',views.eliminarRegistroNomina,name='eliminarNomina'),
 ]
