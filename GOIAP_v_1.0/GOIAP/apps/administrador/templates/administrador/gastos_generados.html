@@ -34,7 +34,7 @@
 			{% for documento in listFacturas %}
 			<tr>
 				<td>{{documento.id}}</td>
-				<td><img src='{{ obras.imagen.url }}' width="100px" height="100px" ></td>
+				<td><img src='{{ documento.imagen.url }}' width="100px" height="100px" ></td>
 				<td>{{documento.empresa}}</td>
 				<td>{{documento.nit_empresa}}</td>
 				<td>{{documento.codigo_factura}}</td>
