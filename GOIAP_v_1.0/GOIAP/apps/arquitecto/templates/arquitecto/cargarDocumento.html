@@ -14,6 +14,11 @@
 	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </nav>
 {% endblock %}
+{% block menu %}
+<ul class="menu">
+	<li><a href="{% url 'gestionarDocumentosArquitecto' %}" class="linksPrincipal">Atras</a></li>
+</ul>
+{% endblock %}
 {% block contenido %}
 {% if message %}
 		<div class="alert alert-dismissible alert-success alerta" id="advertencia">
@@ -48,7 +53,7 @@
 			<div class="left">
 				<div class="form-group">
 					<label for="nroPag" class="control-label control labels">Numero Paginas</label>
-					<input type="number" class="form-control control form" id="nroPag" name="nroPag" required>
+					<input type="number" class="form-control control form" min="0" id="nroPag" name="nroPag" required>
 				</div>
 			</div>
 			<div class="left">

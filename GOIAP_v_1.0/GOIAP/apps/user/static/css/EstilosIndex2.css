@@ -21,7 +21,7 @@
 	width: 40%;
 	height: 55%;
 	margin: 3%;
-	padding-top: 4%;
+	padding-top: 2%;
 	border-radius:15px;
 }
 
@@ -96,4 +96,9 @@ footer{
 	line-height: 3;
 	color: #B08A04;
 	background: #252932;
+}
+
+.form-control.invalid{
+    border: 1px solid #DF0101;
+
 }

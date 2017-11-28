@@ -14,6 +14,11 @@
 	<a href="{% url 'logout' %}" ><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </nav>
 {% endblock %}
+{% block menu %}
+<ul class="menu">
+	<li><a href="{% url 'gestionarInventarioArquitecto' %}" class="linksPrincipal">Atras</a></li>
+</ul>
+{% endblock %}
 {% block contenido %}
 {% if message %}
 		<div class="alert alert-dismissible alert-success alerta" id="advertencia">
@@ -54,7 +59,7 @@
 			<div class="left">
 				<div class="form-group">
 					<label for="nroArticulos" class="control-label control labels">nroArticulos</label>
-					<input type="number" class="form-control control form" id="nroArticulos" name="nroArticulos" value="{{inventario.nro_articulos}}" required>
+					<input type="number" class="form-control control form" min="0" id="nroArticulos" name="nroArticulos" value="{{inventario.nro_articulos}}" required>
 				</div>
 			</div>
 			{% if listObras %}

@@ -2,14 +2,14 @@
 {% load staticfiles %}
 {% block title %}GOIAP{% endblock %} 
 {% block extra %}
-<link rel="stylesheet" href="{% static 'css/EstilosIndex.css' %}">
+<link rel="stylesheet" href="{% static 'css/EstilosIndex2.css' %}">
 <script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
-<script src="{% static 'js/ScriptsGeneral.js' %}"></script>
+<script src="{% static 'js/ScriptsGeneral2.js' %}"></script>
 {% endblock %}
 {% block imagen%} <a href="{% url 'index' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
 <nav class="iconos">
-	<a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+	<a href="#"><i class="fa fa-question-circle" id="sinNumeral" aria-hidden="true"></i></a>
 </nav>
 {% endblock %}
 {% block contenido %}
@@ -23,16 +23,18 @@
 	<fieldset>
 		<form action="" method="post">{% csrf_token %}
 			{{ form.as_p }}
+			<!-- <div class="form-control-feedback" id="divUser">a</div> -->
 			<input class="form-control" type="text" id="user" name="user" placeholder="Escribe Nombre de Usuario"><br>
+			<!-- <div class="form-control-feedback" id="divPass">  a</div> -->
 			<input class="form-control" type="password" id="password" name="password" placeholder="Escribe Contrase&ntilde;a"><br>
 			<input type="submit" class="btn btn-default boton" id="botonIngresar" value="Ingresar">
 		</form>
 	</fieldset>
-	<div id="links">
+	<!-- <div id="links">
 		<nav class="navLogin">
 			<a href="#" class="pos">Olvido su Contrase&ntilde;a</a>
 		</nav>
-	</div>
+	</div> -->
 </div>
 {% endblock %}
 <div id="contenedor"></div>

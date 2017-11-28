@@ -110,3 +110,10 @@ footer{
 	color: #B08A04;
 	background: #252932;
 }
+
+.form-control.invalid{
+	background-color: #FFFFCC;
+    border: 2px dashed #808000;
+    border-left: 4px solid #808000;
+    width: 230px;
+}
