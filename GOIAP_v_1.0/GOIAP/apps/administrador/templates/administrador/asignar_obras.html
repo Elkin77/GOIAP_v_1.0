@@ -9,6 +9,7 @@
 <script src="{% static 'js/ScriptsGeneral.js' %}"></script>
 <script src="{% static 'js/ScriptsIndex.js' %}"></script>
 <script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
+<script src="{% static 'js/Formularios.js' %}"></script>
 {% endblock %}
 {% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
@@ -35,7 +36,7 @@
 	<fieldset>
 		<legend>Asignar Nueva Obra</legend>
 		
-		<form action="" method="POST">
+		<form action="" method="POST" onsubmit="return validarTwo();">
 			{% csrf_token %}
 
 			<table>
@@ -59,7 +60,7 @@
 				<label for="descripcion" class="control-label control labels">Descripción:</label>
 			</td>	
 			<td>		
-				<textarea class="control-label control labels" rows="6" cols="35" name="descripcion" placeholder="Ingrese la descripción Aquí" style="margin: 0px; width: 241px; height: 60px;"></textarea>
+				<textarea id="descripcion" class="control-label control labels" rows="6" cols="35" name="descripcion" placeholder="Ingrese la descripción Aquí" style="margin: 0px; width: 241px; height: 60px;"></textarea>
 			</td>
 			<td>
 				<input type="submit" class="btn btn-default boton" name="guardar" value="Guardar">

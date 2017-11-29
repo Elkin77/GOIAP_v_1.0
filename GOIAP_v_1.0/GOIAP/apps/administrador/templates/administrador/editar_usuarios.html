@@ -3,6 +3,7 @@
 {% block title %}Administrador GOIAP {% endblock %}
 {% block extra %}
 <link rel="stylesheet" href="{% static 'css/EstilosBaseFormularios.css' %}">
+<script src="{% static 'js/Formularios.js' %}"></script>
 {% endblock %}
 {% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
@@ -14,7 +15,7 @@
 <div class="contenedorAgregar">
 	<fieldset>
 		<legend>Editar Usuario</legend>
-		<form action="" method="POST">
+		<form action="" method="POST" onsubmit="return validar();">
 			{% csrf_token %}
 			{{ form.as_p}}
 			<div class="left">

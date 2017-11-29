@@ -7,6 +7,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script><!-- Codigo fuente Jquery -->
 <script src="{% static 'js/ScriptsGeneral.js' %}"></script>
 <script src="{% static 'js/ScriptsCargarDocumento.js' %}"></script>
+<script src="{% static 'js/Formularios.js' %}"></script>
 {% endblock %}
 {% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
@@ -24,7 +25,7 @@
 <div class="contenedorAgregar">
 	<fieldset>
 		<legend>Cargar Documento</legend>
-		<form action="" method="POST" enctype="multipart/form-data">
+		<form action="" method="POST" enctype="multipart/form-data" onsubmit="return validarThree();">
 			{% csrf_token %}
 			{{ form.as_p}}
 			<div class="left">
@@ -33,10 +34,16 @@
 					<input type="text" class="form-control control form" id="nombre" name="nombre" placeholder="Nombre Documento" required>
 				</div>
 			</div>
+
 			<div class="left">
 				<div class="form-group">
 					<label for="tipoDoc" class="control-label control labels">Tipo Documento</label>
-					<input type="text" class="form-control control form" id="tipoDoc" name="tipoDoc" placeholder="Tipo Documento" required>
+					<select class="form-control control form" id="tipoDoc" name="tipoDoc">
+						<option>Administración</option>
+						<option>Contable</option>
+						<option>Legal</option>
+						<option>General</option>
+					</select>
 				</div>
 			</div>
 			<div class="left">
@@ -48,7 +55,7 @@
 			<div class="left">
 				<div class="form-group">
 					<label for="nroPag" class="control-label control labels">Numero Paginas</label>
-					<input type="number" class="form-control control form" id="nroPag" name="nroPag" required>
+					<input type="number" class="form-control control form" max="200" min="1" id="nroPag" name="nroPag" required>
 				</div>
 			</div>
 			<div class="left">
@@ -65,7 +72,7 @@
 						{% for obras in listObras %}
 						<option value="{{obras.pk}}">{{obras.nombre}}</option>
 						{% endfor %}
-					</select><br>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
@@ -79,7 +86,7 @@
 					<label for="obra" class="control-label control labels">Obra</label>
 					<select class="form-control control form" id="obra" name="obra" disabled>
 						<option>No hay Obras Registradas en el Sistema</option>
-					</select><br>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
