@@ -8,6 +8,7 @@
 <script src="{% static 'js/ScriptsGeneral.js' %}"></script>
 <script src="{% static 'js/ScriptsIndex.js' %}"></script>
 <script src="{% static 'js/ScriptsPagPrincAdmin.js' %}"></script>
+<script src="{% static 'js/Formularios.js' %}"></script>
 {% endblock %}
 {% block imagen%} <a href="{% url 'indexAdmin' %}"><img src="{% static 'logo/GOIAP.png' %}" alt=""></a> {% endblock %}
 {% block iconos %}
@@ -27,7 +28,7 @@
 <div class="contenedorAgregar">
 	<fieldset>
 		<legend>Registrar Usuario</legend>
-		<form action="" method="POST">
+		<form action="" method="POST" onsubmit="return validar();">
 			{% csrf_token %}
 			{{ form.as_p}}
 			<div class="left">
